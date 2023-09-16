@@ -3,8 +3,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django.contrib.auth import get_user_model
 
 class CustomAuthenticationForm(AuthenticationForm):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(label="아이디")
+    password = forms.CharField(label="비밀번호", widget=forms.PasswordInput())
 
 
 class CustomUserCreationForm(UserCreationForm):

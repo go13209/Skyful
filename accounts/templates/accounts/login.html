@@ -1,15 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <form action="{% url 'accounts:login' %}" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit">
-  </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static "css/login.css" %}">
+{% endblock style %}
+
+{% block content %}
+  <div class="MainBox">
+    <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static "img/clouds.jpg" %}" class="d-block" alt="맑은 하늘
+          이미지" />
+        </div>
+        <div class="carousel-item">
+          <img src="{% static "img/sunset.jpg" %}" class="d-block" alt="노을빛
+          하늘 이미지" />
+        </div>
+        <div class="carousel-item">
+          <img src="{% static "img/gloomy.jpg" %}" class="d-block" alt="흐린 하늘
+          이미지" />
+        </div>
+        <div class="carousel-item">
+          <img src="{% static "img/moon.jpg" %}" class="d-block" alt="달이 뜬
+          밤하늘 이미지" />
+        </div>
+      </div>
+      <div class="Message">
+        <p>당신의 오늘 하늘은 어땠나요?</p>
+        <p>흐리거나 비가 왔대도 괜찮아요.</p>
+        <p>모든 하늘은 아름다움을 담고 있어요,</p>
+        <p>그리고 당신도 마찬가지에요.</p>
+      </div>
+    </div>
+    
+    <div class="LoginForm">
+      <form action="{% url "accounts:login" %}" method="POST">
+        {% csrf_token %}
+        {% for inputs in form %}
+        <label>{{ inputs.label }}
+          <p id="inputs">{{ inputs }}</p>
+        </label>
+        <br>
+        {% endfor %}
+        <button type="submit">로그인</button>
+      </form>
+    </div>
+    <a href="{% url 'accounts:signup' %}">아직 회원이 아니신가요?</a>
+  </div>
+{% endblock content %}

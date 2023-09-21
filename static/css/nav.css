@@ -1,0 +1,36 @@
+.Navbar {
+  display: flex;
+  justify-content:space-between;
+  padding: 10px;
+}
+.NavbarLeft {
+  display: flex;
+  align-items: center;
+}
+
+.NavbarLeft img {
+  width: 50px;
+}
+
+.NavbarLeft h3 {
+  margin-left: 10px;
+  margin-bottom: 0;
+}
+
+.NavbarRight {
+  display: flex;
+  align-items: center;
+}
+
+.NavbarRight a {
+  text-decoration-line: none;
+  margin-right: 10px;
+}
+
+.buttons {
+  color: white;
+  background-color: #abcded;
+  border: 3px solid #abcded;
+  border-radius: 5px;
+  padding: 5px;
+}

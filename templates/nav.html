@@ -1,0 +1,22 @@
+{% load static %}
+<head>
+  <link rel="stylesheet" href="{% static "css/nav.css" %}">
+</head>
+
+<nav>
+  <div class="Navbar">
+    <div class="NavbarLeft">
+      <img src="{% static "img/cloud.png" %}" alt="구름 로고">
+      <h3>오늘의 하늘</h3>
+    </div>
+    {% if user.is_authenticated %}
+      <div class="NavbarRight">
+        <a class="buttons" href="">내 정보</a>
+        <form action="{% url "accounts:logout" %}" method="POST">
+          {% csrf_token %}
+          <button class="buttons" type-="submit">로그아웃</button>
+        </form>
+      </div>
+    {% endif %}
+  </div>
+</nav>

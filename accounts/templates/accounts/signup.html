@@ -1,16 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>회원가입</h1>
-  <form action="{% url 'accounts:signup' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit">
-  </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static "css/signup.css" %}">
+{% endblock style %}
+
+{% block content %}
+  <div class="MainBox">
+    <h2>회원가입</h2>
+    <p>* 표시 항목은 필수 입력 항목입니다.</p>
+    <div class="SignupForm">
+      <form action="{% url 'accounts:signup' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for inputs in form %}
+          {% if inputs.name == "profile_img" %}
+            <label for="ProfileImage">{{inputs.label}}
+              <input type="file" name="ProfileImage" id="ProfileImage" accept="image/*" onchange="previewImage(this)">
+            </label>
+          {% else %}
+            <label>{{inputs.label}}
+              <p id="inputs">{{inputs}}</p>
+            </label>
+          {% endif %}
+          <br>
+        {% endfor %}
+        <div class="ImageBox">
+          <img class="Preview" src="#" alt="프로필 이미지 미리보기">
+        </div>
+        <button type="submit">회원가입</button>
+      </form>
+    </div>
+    <a href="{% url 'accounts:login' %}">⬅️ 돌아가기</a>
+  </div>
+{% endblock content %}
+
+{% block js %}
+  <script src="{% static "js/signup.js" %}"></script>
+{% endblock js %}

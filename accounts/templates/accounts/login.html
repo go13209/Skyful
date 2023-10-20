@@ -39,7 +39,7 @@
         {% csrf_token %}
         {% for inputs in form %}
         <label>{{ inputs.label }}
-          <p id="inputs">{{ inputs }}</p>
+          <p>{{ inputs }}</p>
         </label>
         <br>
         {% endfor %}

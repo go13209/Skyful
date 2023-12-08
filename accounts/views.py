@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from .models import User
 from .forms import (
     CustomAuthenticationForm,
     CustomUserCreationForm,
@@ -8,6 +9,7 @@ from .forms import (
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
+import os
 
 
 def login(request):
@@ -48,6 +50,14 @@ def update(request):
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
+            try:
+                old_instance = User.objects.get(pk=request.user.pk)
+                if old_instance.profile_img:
+                    path = old_instance.profile_img.path
+                    if os.path.exists(path):
+                        os.remove(path)
+            except User.DoesNotExist:
+                pass
             form.save()
             return redirect("posts:main")
     else:

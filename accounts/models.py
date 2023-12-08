@@ -6,6 +6,14 @@ from imagekit.processors import ResizeToFill
 
 class User(AbstractUser):
     def image_path(instance, filename):
-        return f'accounts/{instance.username}/{filename}'
+        return f"accounts/{instance.username}/{filename[:10]}"
+
     nickname = models.CharField(max_length=20)
-    profile_img = ProcessedImageField(upload_to=image_path, processors=[ResizeToFill(200,200)], format='JPEG', options={'quality': 90}, null=True, blank=True)
+    profile_img = ProcessedImageField(
+        upload_to=image_path,
+        processors=[ResizeToFill(200, 200)],
+        format="JPEG",
+        options={"quality": 90},
+        null=True,
+        blank=True,
+    )

@@ -1,16 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>회원정보 수정</h1>
-  <form action="{% url 'accounts:update' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit">
-  </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static "css/update.css" %}">
+{% endblock style %}
+
+{% block content %}
+  <div class="MainBox">
+    <h2>회원정보 수정</h2>
+    <p>* 표시 항목은 필수 입력 항목입니다.</p>
+    <div class="UpdateForm">
+      <form action="{% url 'accounts:update' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="ImageBox">
+          {% if request.user.profile_img %}
+            <img class="Preview_1" src={{ request.user.profile_img.url }} alt="프로필 이미지 미리보기">
+          {% else %}
+            <img class="Preview_2" src="#" alt="프로필 이미지 미리보기">
+          {% endif %}
+        </div>
+        <button type="submit">회원정보 수정</button>
+      </form>
+    </div>
+    <a href="{% url 'posts:main' %}">⬅️ 돌아가기</a>
+  </div>
+{% endblock content %}
+
+
+{% block js %}
+  <script src="{% static "js/update.js" %}"></script>
+{% endblock js %}

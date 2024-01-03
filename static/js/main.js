@@ -32,7 +32,8 @@ function updateCalendar() {
       const dayNumber = i - firstDayOfMonth;
       dayElement.textContent = dayNumber;
 
-      const dayOfWeek = (firstDayOfMonth + i - 1) % 7;
+      const date = new Date(selectedYear, selectedMonth - 1, dayNumber);
+      const dayOfWeek = date.getDay();
 
       if (dayOfWeek === 6) { // 토요일
         dayElement.classList.add('saturday');
@@ -42,38 +43,42 @@ function updateCalendar() {
 
       // 해당 날짜에 포스트가 있는지 확인하고 처리하는 함수
       const diaryDate = `${selectedYear}-${selectedMonth}-${dayNumber}`;
-      checkPostAndHandleClick(dayElement, diaryDate);
+      checkPostAndHandleStyles(dayElement, diaryDate);
     }
 
     calendarDays.appendChild(dayElement);
   }
 }
 
-// 해당 날짜에 포스트가 있는지 확인하고 처리하는 함수
-function checkPostAndHandleClick(dayElement, date) {
-  fetch(`/posts/check_post/${date}/`)
+// 해당 날짜에 포스트가 있는지 확인하고 스타일을 적용하는 함수
+function checkPostAndHandleStyles(dayElement, post_date) {
+  const emptyCloudImageUrl = '../../static/img/empty_cloud.png';
+  const cloudImageUrl = '../../static/img/cloud.png';
+
+  fetch(`/posts/check_post/${post_date}/`)
     .then(response => response.json())
     .then(data => {
       if (data.has_post) {
-        // 포스트가 있으면 해당 포스트의 디테일 페이지로 이동
-        dayElement.style.backgroundImage = 'url("{% static "img/cloud.png" %}")';
-        dayElement.style.backgroundRepeat = 'no-repeat';
-        dayElement.style.backgroundPosition = 'center';
-        dayElement.style.backgroundSize = 'contain';
-        dayElement.onclick = () => {
-          window.location.href = `/posts/detail/${date}/`; // 디테일 페이지 URL로 수정
-        };
-      } else {
+        // 포스트가 있으면 구름 이미지 설정
+        dayElement.style.backgroundImage = `url(${cloudImageUrl})`;
+    } else {
         // 포스트가 없으면 빈 구름 이미지 설정
-        dayElement.style.backgroundImage = 'url("{% static "img/emptycloud.png" %}")';
-        dayElement.style.backgroundRepeat = 'no-repeat';
-        dayElement.style.backgroundPosition = 'center';
-        dayElement.style.backgroundSize = 'contain';
+        dayElement.style.backgroundImage = `url(${emptyCloudImageUrl})`;
+    }    
 
-        dayElement.onclick = () => {
-          window.location.href = `/posts/create/`; // 디테일 페이지 URL로 수정
-        };
-      }
+      // 스타일 공통 설정
+      dayElement.style.backgroundRepeat = 'no-repeat';
+      dayElement.style.backgroundPosition = 'center';
+      dayElement.style.backgroundSize = 'contain';
+
+      // 클릭 이벤트 설정
+      dayElement.addEventListener('click', () => {
+        if (data.has_post) {
+          window.location.href = `/posts/detail/${post_date}/`;
+        } else {
+          window.location.href = `/posts/create/${post_date}/`;
+        }
+      });
     })
     .catch(error => console.error('Error:', error));
 }

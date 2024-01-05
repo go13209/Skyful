@@ -1,11 +1,13 @@
 .Navbar {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   padding: 10px;
 }
-.NavbarLeft {
+.NavbarLeft a {
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: black;
 }
 
 .NavbarLeft img {

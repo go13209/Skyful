@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static "css/create.css" %}">
+{% endblock style %}
+
+{% block content %}
+  <div class="MainBox">
+    <h2>일기 작성</h2>
+    <div class="CreateForm">
+      <form action="{% url 'posts:create' date %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <!-- 이미지 폼셋 시작 -->
+        {{ formset.management_form }}
+        <div class="formset" data-formset-prefix="{{ formset.prefix }}">
+          {% for form in formset %}
+          <div class="image-container">
+            <label for="id_{{ formset.prefix }}-{{ forloop.counter0 }}-image">
+              <img class="postImage" src="{% static "img/add-image.png" %}" alt="이미지 추가 버튼">
+            </label>
+            {{ form }}
+          </div>
+          {% endfor %}
+        </div>
+
+        <button type="submit">작성하기</button>
+      </form>
+    </div>
+    <a href="{% url 'accounts:login' %}">⬅️ 돌아가기</a>
+  </div>
+{% endblock content %}
+
+{% block js %}
+  <script src="{% static "js/create.js" %}"></script>
+{% endblock js %}

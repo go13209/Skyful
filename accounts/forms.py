@@ -4,15 +4,58 @@ from django.contrib.auth import get_user_model
 
 
 class CustomAuthenticationForm(AuthenticationForm):
-    username = forms.CharField(label="아이디")
-    password = forms.CharField(label="비밀번호", widget=forms.PasswordInput())
+    username = forms.CharField(
+        label="아이디",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control form-field",
+            }
+        ),
+    )
+    password = forms.CharField(
+        label="비밀번호",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control form-field",
+            }
+        ),
+    )
 
 
 class CustomUserCreationForm(forms.ModelForm):
-    username = forms.CharField(label="* 아이디")
-    nickname = forms.CharField(label="* 닉네임", required=True)
-    password1 = forms.CharField(label="* 비밀번호", widget=forms.PasswordInput())
-    password2 = forms.CharField(label="* 비밀번호 확인", widget=forms.PasswordInput())
+    username = forms.CharField(
+        label="* 아이디",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control form-field",
+            }
+        ),
+    )
+    nickname = forms.CharField(
+        label="* 닉네임",
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control form-field",
+            }
+        ),
+    )
+    password1 = forms.CharField(
+        label="* 비밀번호",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control form-field",
+            }
+        ),
+    )
+    password2 = forms.CharField(
+        label="* 비밀번호 확인",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control form-field",
+            }
+        ),
+    )
     profile_img = forms.ImageField(
         label="프로필 이미지(선택)", widget=forms.ClearableFileInput(), required=False
     )
@@ -29,7 +72,15 @@ class CustomUserCreationForm(forms.ModelForm):
 
 
 class CustomUserChangeForm(forms.ModelForm):
-    nickname = forms.CharField(label="* 닉네임", required=True)
+    nickname = forms.CharField(
+        label="* 닉네임",
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control form-field",
+            }
+        ),
+    )
     profile_img = forms.ImageField(
         label="프로필 이미지(선택)", widget=forms.ClearableFileInput(), required=False
     )
@@ -43,5 +94,30 @@ class CustomUserChangeForm(forms.ModelForm):
 
 
 class CustomPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label="기존 비밀번호",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control form-field",
+            }
+        ),
+    )
+    new_password1 = forms.CharField(
+        label="새 비밀번호",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control form-field",
+            }
+        ),
+    )
+    new_password2 = forms.CharField(
+        label="새 비밀번호 확인",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control form-field",
+            }
+        ),
+    )
+
     class Meta(PasswordChangeForm):
         fields = "__all__"

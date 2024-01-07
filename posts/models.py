@@ -13,6 +13,9 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     public = models.BooleanField(default=False)
+    shared_with = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="shared_posts", blank=True
+    )
 
 
 class PostImage(models.Model):

@@ -9,6 +9,7 @@ document
 
 function previewImage(input) {
   const previewImage = input.parentElement.querySelector(".postImage");
+
   if (input.files.length > 0) {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -17,7 +18,7 @@ function previewImage(input) {
     };
     reader.readAsDataURL(input.files[0]);
   } else {
-    previewImage.style.display = "none";
-    previewImage.src = "";
+    previewImage.style.display = "block";
+    previewImage.src = "/static/img/add-image.png";
   }
 }

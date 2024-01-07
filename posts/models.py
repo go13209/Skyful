@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
@@ -7,9 +8,11 @@ class Post(models.Model):
     def image_path(instance, filename):
         return f"accounts/{instance.post.pk}/{filename[:10]}"
 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date = models.DateField(unique=True)
     title = models.CharField(max_length=50)
     content = models.TextField()
+    public = models.BooleanField(default=False)
 
 
 class PostImage(models.Model):

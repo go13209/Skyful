@@ -34,7 +34,11 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = "__all__"
+        fields = (
+            "date",
+            "title",
+            "content",
+        )
 
 
 class PostImageForm(forms.ModelForm):

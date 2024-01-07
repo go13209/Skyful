@@ -14,8 +14,8 @@
         {% csrf_token %}
         {% for inputs in form %}
           {% if inputs.name == "profile_img" %}
-            <label for="ProfileImage">{{inputs.label}}
-              <input type="file" name="ProfileImage" id="ProfileImage" accept="image/*" onchange="previewImage(this)">
+            <label for="id_profile_img">{{inputs.label}}
+              <input type="file" name="profile_img" id="id_profile_img" accept="image/*" onchange="previewImage(this)">
             </label>
           {% else %}
             <label>{{inputs.label}}

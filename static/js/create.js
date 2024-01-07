@@ -22,3 +22,14 @@ function previewImage(input) {
     previewImage.src = "/static/img/add-image.png";
   }
 }
+
+const publicCheckbox = document.getElementById("public");
+const friendCheck = document.querySelector(".friendCheck");
+
+publicCheckbox.addEventListener("change", function () {
+  if (this.checked) {
+    friendCheck.style.display = "block";
+  } else {
+    friendCheck.style.display = "none";
+  }
+});

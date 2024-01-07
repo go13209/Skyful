@@ -1,5 +1,10 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import (
+    AuthenticationForm,
+    UserCreationForm,
+    UserChangeForm,
+    PasswordChangeForm,
+)
 from django.contrib.auth import get_user_model
 
 
@@ -22,7 +27,7 @@ class CustomAuthenticationForm(AuthenticationForm):
     )
 
 
-class CustomUserCreationForm(forms.ModelForm):
+class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(
         label="* 아이디",
         widget=forms.TextInput(
@@ -71,7 +76,7 @@ class CustomUserCreationForm(forms.ModelForm):
         )
 
 
-class CustomUserChangeForm(forms.ModelForm):
+class CustomUserChangeForm(UserChangeForm):
     nickname = forms.CharField(
         label="* 닉네임",
         required=True,

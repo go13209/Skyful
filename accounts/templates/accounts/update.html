@@ -12,7 +12,14 @@
     <div class="UpdateForm">
       <form action="{% url 'accounts:update' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for inputs in form %}
+          {% if inputs.label != '비밀번호' %}
+            <label>{{inputs.label}}
+              <p id="inputs">{{inputs}}</p>
+            </label>
+          {% endif %}
+        {% endfor %}
+
         <div class="ImageBox">
           {% if request.user.profile_img %}
             <img class="Preview_1" src={{ request.user.profile_img.url }} alt="프로필 이미지 미리보기">

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.forms import modelformset_factory
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
-from .forms import PostForm, PostImageForm
+from .forms import PostForm, PostImageForm, CommentForm
 from .models import Post, PostImage
 from datetime import datetime
 
@@ -71,3 +71,15 @@ def check_post(request, post_date):
         return JsonResponse({"has_post": True})
     except Post.DoesNotExist:
         return JsonResponse({"has_post": False})
+
+
+@login_required
+def detail(request, post_date):
+    post = Post.objects.get(user=request.user, date=post_date)
+    images = PostImage.objects.filter(post=post)
+    context = {
+        "post": post,
+        "images": images,
+        "form": CommentForm(),
+    }
+    return render(request, "posts/detail.html", context)

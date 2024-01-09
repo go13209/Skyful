@@ -74,8 +74,8 @@ def check_post(request, post_date):
 
 
 @login_required
-def detail(request, post_date):
-    post = Post.objects.get(user=request.user, date=post_date)
+def detail(request, user_pk, post_date):
+    post = Post.objects.get(user=user_pk, date=post_date)
     images = PostImage.objects.filter(post=post)
     context = {
         "post": post,

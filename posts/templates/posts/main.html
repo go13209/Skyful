@@ -22,5 +22,6 @@
 {% endblock content %}
 
 {% block js %}
+  <script>const userPk = {{ request.user.pk }};</script>
   <script src="{% static "js/main.js" %}"></script>
 {% endblock js %}

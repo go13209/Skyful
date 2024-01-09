@@ -83,3 +83,16 @@ def detail(request, post_date):
         "form": CommentForm(),
     }
     return render(request, "posts/detail.html", context)
+
+
+@login_required
+def comment_create(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.user = request.user
+            comment.save()
+            return redirect("posts:detail", post.date)

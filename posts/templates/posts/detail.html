@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static "css/detail.css" %}">
+{% endblock style %}
+
+{% block content %}
+  <div class="MainBox">
+    <div class="PostBox">
+      <h2>{{ post.title }}</h2>
+      <div class="post-public-date">
+        {% if post.shared_with.count > 0 %}
+          <span class="public">공유중</span>
+        {% else %}
+          <span class="private">비공개</span>
+        {% endif %}
+        <span class="post-date">{{ post.date|date:"Y-m-d" }}</span>
+      </div>
+      <hr>
+      <div class="PostButtons">
+        <a href=""><i class="fa-solid fa-pen-to-square"></i> 수정</a>
+        <a href=""><i class="fa-solid fa-trash-can"></i> 삭제</a>
+      </div>
+      <div class="PostContent">
+        {{ post.content }}
+      </div>
+      {% if images %}
+        <div class="post-images">
+          {% for image in images %}            
+            <button type="button" data-bs-toggle="modal" data-bs-target="#imageModal{{ image.pk }}">
+              <img class="preview" src="{{ image.image.url }}" alt="일기 사진">
+            </button>
+          
+            <div class="modal fade" id="imageModal{{ image.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <img class="modal-image" src="{{ image.image.url }}" alt="일기 사진">
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="comment-box">
+        <form method="post" action="{% url 'posts:comment_create' post.pk %}">
+          {% csrf_token %}
+          <div class="comment-content-box">
+            {{ form.content }}
+            <button type="submit">댓글달기</button>
+          </div>
+        </form>
+      </div>
+
+      {% if post.comment_set.count > 0 %}
+        <div class="accordion accordion-flush" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                댓글({{ post.comment_set.count }})
+              </button>
+            </h2>
+            
+            {% for comment in post.comment_set.all %}
+              <div id="collapseOne" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  <div class="comment-writer-info">
+                    {% if comment.user.profile_img %}
+                      <img src="{{ comment.user.profile_img.url }}" alt="프로필 이미지">
+                    {% else %}
+                      <img src="{% static "img/user.png" %}" alt="기본 프로필 이미지">
+                    {% endif %}
+                    <div>
+                      <div>{{ comment.user.nickname }}</div>
+                      <div class="comment-date">{{ comment.created_at|date:"Y-m-d, f" }}</div>
+                    </div>
+                  </div>
+                  <div class="comment-content">
+                    {{ comment.content }}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+      
+    </div>
+    <a class="BackButton" href="{% url 'posts:main' %}">⬅️ 돌아가기</a>
+  </div>
+{% endblock content %}
+
+{% block js %}
+  <script src="{% static "js/detail.js" %}"></script>
+{% endblock js %}

@@ -1,0 +1,131 @@
+.MainBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-weight: bold;
+}
+
+.PostBox {
+  border: 3px solid #abcded;
+  border-radius: 10px;
+  padding: 20px;
+  width: 600px;
+}
+
+.post-public-date {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.post-public-date .public {
+  border-radius: 10px;
+  background-color: #73aed9;
+  color: #ffffff;
+  padding: 5px 10px;
+}
+
+.post-public-date .private {
+  border-radius: 10px;
+  background-color: #8c8c8c;
+  color: #ffffff;
+  padding: 5px 10px;
+}
+
+.post-date {
+  color: #8e8e8e;
+  word-spacing: 5px;
+  margin-left: 10px;
+}
+
+.PostButtons {
+  text-align: right;
+}
+
+.PostButtons a {
+  color: #8e8e8e;
+  text-decoration-line: none;
+  margin-left: 10px;
+}
+
+.PostContent {
+  min-height: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 15px 0;
+}
+
+.post-images button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.preview {
+  width: 100px;
+  height: 100px;
+}
+
+.modal-image {
+  width: 100%;
+}
+
+.comment-box form {
+  margin: 15px 0;
+}
+
+.comment-content-box {
+  display: flex;
+}
+
+.comment-box button {
+  width: 100px;
+  color: white;
+  background-color: #abcded;
+  border: 3px solid #abcded;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.accordion-body {
+  padding: 0;
+  margin: 10px 0 15px;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: transparent;
+}
+
+.accordion-button:focus {
+  border-color: #abcded;
+}
+
+.comment-writer-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.comment-date {
+  color: #8e8e8e;
+}
+
+.comment-writer-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-content {
+  padding: 0 10px;
+}
+
+.BackButton {
+  margin-top: 15px;
+  text-decoration-line: none;
+  color: black;
+}

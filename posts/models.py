@@ -6,7 +6,7 @@ from imagekit.processors import ResizeToFill
 
 class Post(models.Model):
     def image_path(instance, filename):
-        return f"accounts/{instance.post.pk}/{filename}"
+        return f"posts/{instance.pk}/{filename}"
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date = models.DateField(unique=True)

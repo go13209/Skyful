@@ -1,5 +1,5 @@
 function previewImage(input) {
-  const profileImagePreview = document.querySelector('.Preview');
+  const profileImagePreview = document.querySelector('.preview');
   if (input.files.length > 0) {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -14,7 +14,7 @@ function previewImage(input) {
 }
 
 window.onload = function () {
-  const profileImagePreview = document.querySelector('.Preview');
+  const profileImagePreview = document.querySelector('.preview');
   profileImagePreview.style.display = 'none';
   profileImagePreview.src = '';
 };

@@ -1,4 +1,4 @@
-.MainBox {
+.main-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,7 +7,7 @@
   font-weight: bold;
 }
 
-.PostBox {
+.post-box {
   border: 3px solid #abcded;
   border-radius: 10px;
   padding: 20px;
@@ -40,17 +40,17 @@
   margin-left: 10px;
 }
 
-.PostButtons {
+.post-buttons {
   text-align: right;
 }
 
-.PostButtons a {
+.post-buttons a {
   color: #8e8e8e;
   text-decoration-line: none;
   margin-left: 10px;
 }
 
-.PostContent {
+.post-content {
   min-height: 200px;
   max-height: 300px;
   overflow-y: auto;
@@ -124,7 +124,7 @@
   padding: 0 10px;
 }
 
-.BackButton {
+.back-button {
   margin-top: 15px;
   text-decoration-line: none;
   color: black;

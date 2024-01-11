@@ -1,6 +1,6 @@
 const profileInput = document.querySelector('input[type="file"]');
-const profilePreview_1 = document.querySelector(".Preview_1");
-const profilePreview_2 = document.querySelector(".Preview_2");
+const profilePreview_1 = document.querySelector(".preview-1");
+const profilePreview_2 = document.querySelector(".preview-2");
 
 // 페이지 로드 시 프로필 이미지 가져오기
 window.onload = function () {

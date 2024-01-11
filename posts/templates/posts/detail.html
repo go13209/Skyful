@@ -6,8 +6,8 @@
 {% endblock style %}
 
 {% block content %}
-  <div class="MainBox">
-    <div class="PostBox">
+  <div class="main-box">
+    <div class="post-box">
       <h2>{{ post.title }}</h2>
       <div class="post-public-date">
         {% if post.shared_with.count > 0 %}
@@ -18,11 +18,11 @@
         <span class="post-date">{{ post.date|date:"Y-m-d" }}</span>
       </div>
       <hr>
-      <div class="PostButtons">
-        <a href="{% url 'posts:update' post.pk %}"><i class="fa-solid fa-pen-to-square"></i> 수정</a>
+      <div class="post-buttons">
+        <a href="{% url "posts:update" post.pk %}"><i class="fa-solid fa-pen-to-square"></i> 수정</a>
         <a href=""><i class="fa-solid fa-trash-can"></i> 삭제</a>
       </div>
-      <div class="PostContent">
+      <div class="post-content">
         {{ post.content }}
       </div>
       
@@ -50,7 +50,7 @@
       {% endif %}
 
       <div class="comment-box">
-        <form method="post" action="{% url 'posts:comment_create' post.pk %}">
+        <form method="post" action="{% url "posts:comment_create" post.pk %}">
           {% csrf_token %}
           <div class="comment-content-box">
             {{ form.content }}
@@ -93,10 +93,9 @@
       {% endif %}
       
     </div>
-    <a class="BackButton" href="{% url 'posts:main' %}">⬅️ 돌아가기</a>
+    <a class="back-button" href="{% url "posts:main" %}">⬅️ 돌아가기</a>
   </div>
 {% endblock content %}
 
 {% block js %}
-  <script src="{% static "js/detail.js" %}"></script>
 {% endblock js %}

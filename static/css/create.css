@@ -1,4 +1,4 @@
-.MainBox {
+.main-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,60 +7,60 @@
   font-weight: bold;
 }
 
-.CreateForm {
+.create-form {
   border: 3px solid #abcded;
   border-radius: 10px;
   padding: 20px;
   width: 600px;
 }
 
-.CreateForm label,
+.create-form label,
 input {
   width: 100%;
 }
 
-.ImageBox {
+.image-box {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 15px;
 }
 
-.Preview {
+.preview {
   display: none;
   height: 200px;
 }
 
-.PublicCheck {
+.public-check {
   margin-bottom: 16px;
 }
 
-.friendCheck {
+.friend-check {
   margin-bottom: 16px;
   max-height: 200px;
   overflow-y: auto;
   display: none;
 }
 
-.friendCheck .form-check {
+.friend-check .form-check {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
 }
 
-.friendCheck label {
+.friend-check label {
   display: flex;
   align-items: center;
 }
 
-.friendCheck img {
+.friend-check img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin: 0 10px;
 }
 
-.CreateForm button {
+.create-form button {
   width: 100%;
   color: white;
   background-color: #abcded;
@@ -69,7 +69,7 @@ input {
   padding: 5px;
 }
 
-.MainBox a {
+.main-box a {
   margin-top: 15px;
   text-decoration-line: none;
   color: black;

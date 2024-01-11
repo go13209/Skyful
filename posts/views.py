@@ -76,7 +76,7 @@ def comment_create(request, post_pk):
             comment.post = post
             comment.user = request.user
             comment.save()
-            return redirect("posts:detail", post.date)
+            return redirect("posts:detail", request.user.pk, post.date)
 
 
 @login_required

@@ -6,10 +6,10 @@
 {% endblock style %}
 
 {% block content %}
-  <div class="MainBox">
+  <div class="main-box">
     <h2>일기 작성</h2>
-    <div class="CreateForm">
-      <form action="{% url 'posts:create' date %}" method="POST" enctype="multipart/form-data">
+    <div class="create-form">
+      <form action="{% url "posts:create" date %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for inputs in form %}
           {% if inputs.name == "post_img" %}
@@ -23,16 +23,16 @@
           {% endif %}
           <br>
         {% endfor %}
-        <div class="ImageBox">
-          <img class="Preview" src="#" alt="프로필 이미지 미리보기">
+        <div class="image-box">
+          <img class="preview" src="#" alt="프로필 이미지 미리보기">
         </div>
 
-        <div class="form-check form-switch PublicCheck">
+        <div class="form-check form-switch public-check">
           <label class="form-check-label" for="public">공유(서로 친구일 때만 가능)</label>
           <input class="form-check-input" type="checkbox" role="switch" id="public" name="public">
         </div>
 
-        <div class="friendCheck">
+        <div class="friend-check">
           {% for friend in friends %}
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="shared_with" value="{{ friend.id }}" id="friend{{ friend.id }}">
@@ -53,7 +53,7 @@
         <button type="submit">작성하기</button>
       </form>
     </div>
-    <a href="{% url 'posts:main' %}">⬅️ 돌아가기</a>
+    <a href="{% url "posts:main" %}">⬅️ 돌아가기</a>
   </div>
 {% endblock content %}
 

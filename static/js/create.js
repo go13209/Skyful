@@ -1,5 +1,5 @@
 function previewImage(input) {
-  const postImagePreview = document.querySelector(".Preview");
+  const postImagePreview = document.querySelector(".preview");
   if (input.files.length > 0) {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -14,13 +14,13 @@ function previewImage(input) {
 }
 
 window.onload = function () {
-  const postImagePreview = document.querySelector(".Preview");
+  const postImagePreview = document.querySelector(".preview");
   postImagePreview.style.display = "none";
   postImagePreview.src = "";
 };
 
 const publicCheckbox = document.getElementById("public");
-const friendCheck = document.querySelector(".friendCheck");
+const friendCheck = document.querySelector(".friend-check");
 
 publicCheckbox.addEventListener("change", function () {
   if (this.checked) {

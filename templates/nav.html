@@ -4,15 +4,15 @@
 </head>
 
 <nav>
-  <div class="Navbar">
-    <div class="NavbarLeft">
+  <div class="navbar">
+    <div class="navbar-left">
       <a href="{% url "posts:main" %}">
         <img src="{% static "img/cloud.png" %}" alt="구름 로고">
         <h3>당신의 하늘</h3>
       </a>
     </div>
     {% if user.is_authenticated %}
-      <div class="NavbarRight">
+      <div class="navbar-right">
         <a class="buttons" href="">내 정보</a>
         <form action="{% url "accounts:logout" %}" method="POST">
           {% csrf_token %}

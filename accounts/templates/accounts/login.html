@@ -6,7 +6,7 @@
 {% endblock style %}
 
 {% block content %}
-  <div class="MainBox">
+  <div class="main-box">
     <div id="carousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -26,7 +26,7 @@
           밤하늘 이미지" />
         </div>
       </div>
-      <div class="Message">
+      <div class="message">
         <p>당신의 오늘 하늘은 어땠나요?</p>
         <p>흐리거나 비가 왔대도 괜찮아요.</p>
         <p>모든 하늘은 아름다움을 담고 있어요,</p>
@@ -34,7 +34,7 @@
       </div>
     </div>
     
-    <div class="LoginForm">
+    <div class="login-form">
       <form action="{% url "accounts:login" %}" method="POST">
         {% csrf_token %}
         {% for inputs in form %}
@@ -46,6 +46,6 @@
         <button type="submit">로그인</button>
       </form>
     </div>
-    <a href="{% url 'accounts:signup' %}">아직 회원이 아니신가요?</a>
+    <a href="{% url "accounts:signup" %}">아직 회원이 아니신가요?</a>
   </div>
 {% endblock content %}

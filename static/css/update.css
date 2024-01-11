@@ -1,4 +1,4 @@
-.MainBox {
+.main-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,26 +7,26 @@
   font-weight: bold;
 }
 
-.UpdateForm {
+.update-form {
   border: 3px solid #abcded;
   border-radius: 10px;
   padding: 20px;
   width: 450px;
 }
 
-.ImageBox {
+.image-box {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 15px;
 }
 
-.Preview_1,
-.Preview_2 {
+.preview-1,
+.preview-2 {
   height: 200px;
 }
 
-.UpdateForm button {
+.update-form button {
   width: 100%;
   color: white;
   background-color: #abcded;
@@ -35,7 +35,7 @@
   padding: 5px;
 }
 
-.MainBox a {
+.main-box a {
   margin-top: 15px;
   text-decoration-line: none;
   color: black;

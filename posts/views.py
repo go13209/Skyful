@@ -77,3 +77,36 @@ def comment_create(request, post_pk):
             comment.user = request.user
             comment.save()
             return redirect("posts:detail", post.date)
+
+
+@login_required
+def update(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    User = get_user_model()
+    person = User.objects.get(pk=request.user.pk)
+
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.public = request.POST.get("public") == "on"
+            post.save()
+
+            shared_users = request.POST.getlist("shared_with")
+            post.shared_with.set(shared_users)
+
+            return redirect("posts:main")
+    else:
+        form = PostForm(instance=post)
+
+    following = person.followings.all()
+    followers = person.followers.all()
+    friends = following | followers
+
+    context = {
+        "post": post,
+        "form": form,
+        "friends": friends,
+    }
+    return render(request, "posts/update.html", context)

@@ -1,6 +1,5 @@
 from django import forms
-from .models import Post, PostImage, Comment
-from django.utils.translation import gettext_lazy as _
+from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
@@ -32,23 +31,18 @@ class PostForm(forms.ModelForm):
         ),
     )
 
+    post_img = forms.ImageField(
+        label="이미지(선택)", widget=forms.ClearableFileInput(), required=False
+    )
+
     class Meta:
         model = Post
         fields = (
             "date",
             "title",
             "content",
+            "post_img",
         )
-
-
-class PostImageForm(forms.ModelForm):
-    image = forms.ImageField(
-        label="", widget=forms.ClearableFileInput(), required=False
-    )
-
-    class Meta:
-        model = PostImage
-        fields = ("image",)
 
 
 class CommentForm(forms.ModelForm):

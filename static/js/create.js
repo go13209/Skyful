@@ -18,3 +18,14 @@ window.onload = function () {
   postImagePreview.style.display = "none";
   postImagePreview.src = "";
 };
+
+const publicCheckbox = document.getElementById("public");
+const friendCheck = document.querySelector(".friendCheck");
+
+publicCheckbox.addEventListener("change", function () {
+  if (this.checked) {
+    friendCheck.style.display = "block";
+  } else {
+    friendCheck.style.display = "none";
+  }
+});

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static "css/post_update.css" %}">
+{% endblock style %}
+
+{% block content %}
+  <div class="main-box">
+    <h2>일기 수정</h2>
+    <div class="update-form">
+      <form action="{% url 'posts:update' post.pk %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="image-box">
+          {% if post.post_img %}
+            <img class="preview-1" src={{ post.post_img.url }} alt="프로필 이미지 미리보기">
+          {% else %}
+            <img class="preview-2" src="#" alt="프로필 이미지 미리보기">
+          {% endif %}
+        </div>
+
+        <div class="form-check form-switch public-check">
+          <label class="form-check-label" for="public">공유(서로 친구일 때만 가능)</label>
+          {% if post.shared_with.count > 0 %}
+            <input class="form-check-input" type="checkbox" role="switch" id="public" name="public" checked>
+          {% else %}
+            <input class="form-check-input" type="checkbox" role="switch" id="public" name="public">
+          {% endif %}
+        </div>
+
+        <div class="friend-check">
+          {% for friend in friends %}
+            <div class="form-check">
+              {% if friend in post.shared_with.all %}
+                <input class="form-check-input" type="checkbox" name="shared_with" value="{{ friend.id }}" id="friend{{ friend.id }}" checked>
+              {% else %}
+                <input class="form-check-input" type="checkbox" name="shared_with" value="{{ friend.id }}" id="friend{{ friend.id }}">
+              {% endif %}
+              
+              <label class="form-check-label" for="friend{{ friend.id }}">
+                {% if friend.profile_img %}
+                  <img src="{{ friend.profile_img.url }}" alt="프로필 이미지">
+                {% else %}
+                  <img src="{% static "img/user.png" %}" alt="기본 프로필 이미지">
+                {% endif %}
+                <div>
+                  {{ friend.nickname }} ({{ friend.username }})
+                </div>
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+
+        <button type="submit">작성하기</button>
+      </form>
+    </div>
+    <a href="{% url 'posts:main' %}">⬅️ 돌아가기</a>
+  </div>
+{% endblock content %}
+
+{% block js %}
+  <script src="{% static "js/post_update.js" %}"></script>
+{% endblock js %}

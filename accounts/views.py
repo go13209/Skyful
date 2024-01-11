@@ -55,14 +55,6 @@ def update(request):
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            try:
-                old_instance = User.objects.get(pk=request.user.pk)
-                if old_instance.profile_img:
-                    path = old_instance.profile_img.path
-                    if os.path.exists(path):
-                        os.remove(path)
-            except User.DoesNotExist:
-                pass
             form.save()
             return redirect("posts:main")
     else:

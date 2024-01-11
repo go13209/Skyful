@@ -11,20 +11,20 @@
     <div class="CreateForm">
       <form action="{% url 'posts:create' date %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-    
-        <!-- 이미지 폼셋 시작 -->
-        <label>사진 추가</label>
-        {{ formset.management_form }}
-        <div class="formset" data-formset-prefix="{{ formset.prefix }}">
-          {% for form in formset %}
-          <div class="image-container">
-            <label for="id_{{ formset.prefix }}-{{ forloop.counter0 }}-image">
-              <img class="postImage" src="{% static "img/add-image.png" %}" alt="이미지 추가 버튼">
+        {% for inputs in form %}
+          {% if inputs.name == "post_img" %}
+            <label for="id_post_img">{{inputs.label}}
+              <input type="file" name="post_img" id="id_post_img" accept="image/*" onchange="previewImage(this)">
             </label>
-            {{ form }}
-          </div>
-          {% endfor %}
+          {% else %}
+            <label>{{inputs.label}}
+              <p id="inputs">{{inputs}}</p>
+            </label>
+          {% endif %}
+          <br>
+        {% endfor %}
+        <div class="ImageBox">
+          <img class="Preview" src="#" alt="프로필 이미지 미리보기">
         </div>
 
         <div class="form-check form-switch PublicCheck">

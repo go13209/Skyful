@@ -19,17 +19,16 @@ input {
   width: 100%;
 }
 
-.formset {
+.ImageBox {
   display: flex;
-  margin-bottom: 15px;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
 }
 
-.formset img {
-  width: 50px;
-}
-
-.image-container {
-  margin-right: 15px;
+.Preview {
+  display: none;
+  height: 200px;
 }
 
 .PublicCheck {

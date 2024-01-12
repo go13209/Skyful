@@ -5,9 +5,6 @@ from imagekit.processors import ResizeToFill
 
 
 class Post(models.Model):
-    def image_path(instance, filename):
-        return f"posts/{instance.pk}/{filename}"
-
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date = models.DateField(unique=True)
     title = models.CharField(max_length=50)
@@ -17,7 +14,7 @@ class Post(models.Model):
         settings.AUTH_USER_MODEL, related_name="shared_posts", blank=True
     )
     post_img = ProcessedImageField(
-        upload_to=image_path,
+        upload_to="posts",
         processors=[ResizeToFill(200, 200)],
         options={"quality": 90},
         null=True,

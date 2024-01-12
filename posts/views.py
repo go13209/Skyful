@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .forms import PostForm, CommentForm
 from .models import Post
 from datetime import datetime
+import os
 
 
 def main(request):
@@ -110,3 +111,15 @@ def update(request, post_pk):
         "friends": friends,
     }
     return render(request, "posts/update.html", context)
+
+
+@login_required
+def delete(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+    if request.user == post.user:
+        if post.post_img:
+            if os.path.isfile(post.post_img.path):
+                os.remove(post.post_img.path)
+
+        post.delete()
+    return redirect("posts:main")

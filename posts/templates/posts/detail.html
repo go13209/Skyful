@@ -20,32 +20,29 @@
       <hr>
       <div class="post-buttons">
         <a href="{% url "posts:update" post.pk %}"><i class="fa-solid fa-pen-to-square"></i> 수정</a>
-        <a href=""><i class="fa-solid fa-trash-can"></i> 삭제</a>
+        <a href="{% url "posts:delete" post.pk %}"><i class="fa-solid fa-trash-can"></i> 삭제</a>
       </div>
       <div class="post-content">
         {{ post.content }}
       </div>
       
-      {% if images %}
-        <div class="post-images">
-          {% for image in images %}
-            <button type="button" data-bs-toggle="modal" data-bs-target="#imageModal{{ image.pk }}">
-              <img class="preview" src="{{ image.image.url }}" alt="일기 사진">
-            </button>
-          
-            <div class="modal fade" id="imageModal{{ image.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <img class="modal-image" src="{{ image.image.url }}" alt="일기 사진">
-                  </div>
+      {% if post.post_img %}
+        <div class="post-image">
+          <button type="button" data-bs-toggle="modal" data-bs-target="#imageModal">
+            <img class="preview" src="{{ post.post_img.url }}" alt="일기 사진">
+          </button>
+          <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <img class="modal-image" src="{{ post.post_img.url }}" alt="일기 사진">
                 </div>
               </div>
             </div>
-          {% endfor %}
+          </div>
         </div>
       {% endif %}
 

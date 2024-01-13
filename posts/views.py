@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .forms import PostForm, CommentForm
-from .models import Post
+from .models import Post, Comment
 from datetime import datetime
 import os
 
@@ -60,24 +60,13 @@ def check_post(request, post_date):
 @login_required
 def detail(request, user_pk, post_date):
     post = Post.objects.get(user=user_pk, date=post_date)
+    comments = post.comment_set.all()
     context = {
         "post": post,
+        "comments": comments,
         "form": CommentForm(),
     }
     return render(request, "posts/detail.html", context)
-
-
-@login_required
-def comment_create(request, post_pk):
-    post = Post.objects.get(pk=post_pk)
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.user = request.user
-            comment.save()
-            return redirect("posts:detail", request.user.pk, post.date)
 
 
 @login_required
@@ -123,3 +112,25 @@ def delete(request, post_pk):
 
         post.delete()
     return redirect("posts:main")
+
+
+@login_required
+def comment_create(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.user = request.user
+            comment.save()
+            return redirect("posts:detail", request.user.pk, post.date)
+
+
+@login_required
+def comment_delete(request, post_pk, comment_pk):
+    post = Post.objects.get(pk=post_pk)
+    comment = Comment.objects.get(pk=comment_pk)
+    if request.user == comment.user:
+        comment.delete()
+    return redirect("posts:detail", post.user.pk, post.date)

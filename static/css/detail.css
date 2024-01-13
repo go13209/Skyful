@@ -40,14 +40,25 @@
   margin-left: 10px;
 }
 
-.post-buttons {
+.post-buttons,
+.comment-buttons {
   text-align: right;
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 
-.post-buttons a {
+.update-button {
   color: #8e8e8e;
   text-decoration-line: none;
-  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.delete-form button {
+  color: #8e8e8e;
+  font-weight: bold;
+  background-color: transparent;
+  border: 0;
 }
 
 .post-content {
@@ -72,7 +83,7 @@
   width: 100%;
 }
 
-.comment-box form {
+.comment-writing-box form {
   margin: 15px 0;
 }
 
@@ -80,7 +91,7 @@
   display: flex;
 }
 
-.comment-box button {
+.comment-writing-box button {
   width: 100px;
   color: white;
   background-color: #abcded;
@@ -101,6 +112,11 @@
 
 .accordion-button:focus {
   border-color: #abcded;
+}
+
+.comment-box {
+  display: flex;
+  justify-content: space-between;
 }
 
 .comment-writer-info {

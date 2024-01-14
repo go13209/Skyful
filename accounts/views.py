@@ -108,3 +108,19 @@ def follow(request, user_pk):
         return JsonResponse(context)
 
     return redirect("posts:main")
+
+
+@login_required
+def mypage(request):
+    User = get_user_model()
+    person = User.objects.get(pk=request.user.pk)
+    followings = person.followings.all()
+    followers = person.followers.all()
+    shared_posts = person.shared_posts.all()
+    context = {
+        "person": person,
+        "followings": followings,
+        "followers": followers,
+        "shared_posts": shared_posts,
+    }
+    return render(request, "accounts/mypage.html", context)

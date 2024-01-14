@@ -10,4 +10,5 @@ urlpatterns = [
     path("delete/", views.delete, name="delete"),
     path("password_change/", views.password_change, name="password_change"),
     path("follow/<int:user_pk>/", views.follow, name="follow"),
+    path("mypage/", views.mypage, name="mypage"),
 ]

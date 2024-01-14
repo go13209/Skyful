@@ -36,9 +36,9 @@ def create(request, post_date):
     else:
         form = PostForm(initial={"date": post_date})
 
-    following = person.followings.all()
+    followings = person.followings.all()
     followers = person.followers.all()
-    friends = following | followers
+    friends = followings | followers
 
     context = {
         "form": form,

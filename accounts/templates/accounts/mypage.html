@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static "css/mypage.css" %}"> 
+{% endblock style %}
+
+{% block content %}
+  <div class="main-box">
+    <div class="profile-box">
+      {% if person.profile_img %}
+      <img src="{{ person.profile_img.url }}" alt="프로필 이미지" />
+      {% else %} <img src="{% static "img/user.png" %}" alt=""> {% endif %}
+      <p>{{ person.nickname }} ({{ person.username }})</p>
+      <p class="follow-list">
+        <button type="button" data-bs-toggle="modal" data-bs-target="#followings">
+          팔로잉 {{ followings.count }}
+        </button>
+        |
+        <button type="button" data-bs-toggle="modal" data-bs-target="#followers">
+          팔로워 {{ followers.count }}
+        </button>
+      </p>
+
+      <div class="modal fade" id="followings" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">팔로잉({{ followings.count }})</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              {% if followings.count > 0 %}
+                {% for following in followings %}
+                <div class="friend-box">
+                  <div class="friend-info-box">
+                    {% if following.profile_img %}
+                      <img src="{{ following.profile_img.url }}" alt="프로필 이미지">
+                    {% else %}
+                      <img src="{% static "img/user.png" %}" alt="기본 프로필 이미지">
+                    {% endif %}
+                    <span>
+                      {{ following.nickname }}({{ following.username }})
+                    </span>
+                  </div>
+                  <form action="{% url "accounts:follow" following.pk %}" method="POST">
+                    {% csrf_token %}
+                    {% if following in followers %}
+                      <button>팔로우 취소</button>
+                    {% else %}
+                      <button>팔로우</button>
+                    {% endif %}
+                  </form>
+                </div>
+                {% endfor %}
+              {% else %}
+                <div>팔로우 중인 친구가 없습니다. 친구 찾기 기능을 사용해보세요!</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="followers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">팔로워({{ followers.count }})</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              {% if followers.count > 0 %}
+                {% for follower in followers %}
+                <div class="friend-box">
+                  <div class="friend-info-box">
+                    {% if follower.profile_img %}
+                      <img src="{{ follower.profile_img.url }}" alt="프로필 이미지">
+                    {% else %}
+                      <img src="{% static "img/user.png" %}" alt="기본 프로필 이미지">
+                    {% endif %}
+                    <span>
+                      {{ follower.nickname }}({{ follower.username }})
+                    </span>
+                  </div>
+                  <form action="{% url "accounts:follow" follower.pk %}" method="POST">
+                    {% csrf_token %}
+                    {% if follower in followings %}
+                      <button>팔로우 취소</button>
+                    {% else %}
+                      <button>팔로우</button>
+                    {% endif %}
+                  </form>
+                </div>
+                {% endfor %}
+              {% else %}
+                <div>팔로워가 없습니다. 친구 찾기 기능을 사용해보세요!</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="account-update-buttons">
+        <a href="{% url "accounts:update" %}"><button>회원정보 수정</button></a>
+        <a href="{% url "accounts:password_change" %}"><button>비밀번호 변경</button></a>
+      </div>
+    </div>
+    <div class="mypage-box">
+      <div class="mypage-box-header">
+        <button><div class="mypage-box-buttons">공유 일기</div></button>
+        <button><div class="mypage-box-buttons">댓글</div></button>
+        <button><div class="mypage-box-buttons">친구 찾기</div></button>
+      </div>
+      <div class="mypage-box-body">
+        <div class="content-1">
+          <h3>나에게 공유된 일기</h3>
+          <h3>내가 공유한 일기</h3>
+        </div>
+        <div class="content-2"></div>
+        <div class="content-3"></div>
+        
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block js %}
+<script src="{% static "js/mypage.js" %}"></script>
+{% endblock js %}

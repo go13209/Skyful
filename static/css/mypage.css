@@ -1,0 +1,112 @@
+.main-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-weight: bold;
+}
+
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #abcded;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  margin-right: 15px;
+}
+
+.profile-box img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 16px;
+}
+
+.follow-list {
+  color: #8e8e8e;
+}
+
+.follow-list button {
+  background-color: transparent;
+  border: 0;
+  color: #8e8e8e;
+}
+
+.follow-list button:hover,
+.follow-list button:active {
+  background-color: transparent;
+  border: 0;
+  color: #abcded;
+}
+
+.modal-body {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.friend-box {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.friend-info-box img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 5px 0 0;
+}
+
+.friend-box button {
+  color: white;
+  background-color: #abcded;
+  border: 3px solid #abcded;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.account-update-buttons button {
+  color: white;
+  background-color: #abcded;
+  border: 3px solid #abcded;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0 5px;
+}
+
+.mypage-box {
+  width: 800px;
+}
+
+.mypage-box-header {
+  display: flex;
+}
+
+.mypage-box-header button {
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.mypage-box-buttons {
+  border: 3px solid #abcded;
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  padding: 10px;
+  text-align: center;
+  width: 100px;
+}
+
+.mypage-box-body {
+  border: 3px solid #abcded;
+  border-radius: 0 10px 10px;
+  padding: 20px;
+}

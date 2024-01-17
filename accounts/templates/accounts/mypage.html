@@ -100,27 +100,74 @@
         </div>
       </div>
 
-
       <div class="account-update-buttons">
         <a href="{% url "accounts:update" %}"><button>회원정보 수정</button></a>
         <a href="{% url "accounts:password_change" %}"><button>비밀번호 변경</button></a>
       </div>
     </div>
+
     <div class="mypage-box">
       <div class="mypage-box-header">
-        <button><div class="mypage-box-buttons">공유 일기</div></button>
+        <button type="button" data-bs-toggle="collapse" data-bs-target="#shared_post"><div class="mypage-box-buttons">공유 일기</div></button>
         <button><div class="mypage-box-buttons">댓글</div></button>
         <button><div class="mypage-box-buttons">친구 찾기</div></button>
       </div>
+
       <div class="mypage-box-body">
         <div class="content-1">
-          <h3>나에게 공유된 일기</h3>
-          <h3>내가 공유한 일기</h3>
+          <div class="box-1">
+            <h3>나에게 공유된 일기</h3>
+            <div class="shared-posts-box">
+              {% if shared_posts_to_me %}
+                {% for post in shared_posts_to_me %}
+                  <a href="{% url "posts:detail" post.user.pk post.date %}">
+                    <div class="card">
+                      {% if post.post_img %}
+                        <img src="{{ post.post_img.url }}" class="card-img-top" alt="일기 이미지">
+                      {% else %}
+                        <img src="{% static "img/cloud.png" %}" class="card-img-top" alt="일기 이미지">
+                      {% endif %}
+                      <div class="card-body">
+                        <h5 class="card-title text-truncate">{{ post.title }}</h5>
+                        <p class="card-text text-truncate">{{ post.content }}</p>
+                      </div>
+                    </div>
+                  </a>
+                {% endfor %}
+              {% else %}
+                <p>나에게 공유된 일기가 없습니다.</p>
+              {% endif %}
+            </div>
+          </div>
+          <div>
+            <h3>내가 공유한 일기</h3>
+            <div class="shared-posts-box">
+              {% if shared_posts_by_me %}
+                {% for post in shared_posts_by_me %}
+                  <a href="{% url "posts:detail" post.user.pk post.date %}">
+                    <div class="card">
+                      {% if post.post_img %}
+                        <img src="{{ post.post_img.url }}" class="card-img-top" alt="일기 이미지">
+                      {% else %}
+                        <img src="{% static "img/cloud.png" %}" class="card-img-top" alt="일기 이미지">
+                      {% endif %}
+                      <div class="card-body">
+                        <h5 class="card-title text-truncate">{{ post.title }}</h5>
+                        <p class="card-text text-truncate">{{ post.content }}</p>
+                      </div>
+                    </div>
+                  </a>
+                {% endfor %}
+              {% else %}
+                <p>나에게 공유된 일기가 없습니다.</p>
+              {% endif %}
+            </div>
+          </div>
         </div>
         <div class="content-2"></div>
         <div class="content-3"></div>
-        
-      </div>
+      </div>      
+
     </div>
   </div>
 {% endblock content %}

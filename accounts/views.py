@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User
+from posts.models import Post
 from .forms import (
     CustomAuthenticationForm,
     CustomUserCreationForm,
@@ -11,7 +11,6 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
-from django.http import JsonResponse
 
 
 def login(request):
@@ -107,12 +106,15 @@ def mypage(request):
     User = get_user_model()
     person = User.objects.get(pk=request.user.pk)
     followings = person.followings.all()
-    followers = person.followers.all()
-    shared_posts = person.shared_posts.all()
+    followers = person.followers.all()    
+    shared_posts_by_me = Post.objects.filter(user=person, shared_with__isnull=False).order_by("-date")
+    shared_posts_to_me = person.shared_posts.all().order_by("-date")
+
     context = {
         "person": person,
         "followings": followings,
         "followers": followers,
-        "shared_posts": shared_posts,
+        "shared_posts_by_me": shared_posts_by_me,
+        "shared_posts_to_me": shared_posts_to_me,
     }
     return render(request, "accounts/mypage.html", context)

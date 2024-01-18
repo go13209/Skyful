@@ -14,6 +14,16 @@
   width: 600px;
 }
 
+.post-info-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-user-nickname {
+  color: #8e8e8e;
+}
+
 .post-public-date {
   display: flex;
   justify-content: right;

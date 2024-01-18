@@ -9,13 +9,16 @@
   <div class="main-box">
     <div class="post-box">
       <h2>{{ post.title }}</h2>
-      <div class="post-public-date">
-        {% if post.shared_with.count > 0 %}
-          <span class="public">공유중</span>
-        {% else %}
-          <span class="private">비공개</span>
-        {% endif %}
-        <span class="post-date">{{ post.date|date:"Y-m-d" }}</span>
+      <div class="post-info-box">
+        <div class="post-user-nickname">{{ post.user.nickname }}</div>
+        <div class="post-public-date">
+          {% if post.shared_with.count > 0 %}
+            <span class="public">공유중</span>
+          {% else %}
+            <span class="private">비공개</span>
+          {% endif %}
+          <span class="post-date">{{ post.date|date:"Y-m-d" }}</span>
+        </div>
       </div>
       <hr>
       <div class="post-buttons">

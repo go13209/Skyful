@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from posts.models import Post
+from posts.models import Post, Comment
 from .forms import (
     CustomAuthenticationForm,
     CustomUserCreationForm,
@@ -109,6 +109,8 @@ def mypage(request):
     followers = person.followers.all()    
     shared_posts_by_me = Post.objects.filter(user=person, shared_with__isnull=False).order_by("-date")
     shared_posts_to_me = person.shared_posts.all().order_by("-date")
+    posts_with_my_comments = Post.objects.filter(comment__user=person).exclude(user=person).distinct().order_by("-date")
+    posts_with_comments_by_others = Post.objects.filter(comment__user__in=followings, user=person).distinct().order_by("-date")
 
     context = {
         "person": person,
@@ -116,5 +118,7 @@ def mypage(request):
         "followers": followers,
         "shared_posts_by_me": shared_posts_by_me,
         "shared_posts_to_me": shared_posts_to_me,
+        "posts_with_my_comments": posts_with_my_comments,
+        "posts_with_comments_by_others": posts_with_comments_by_others,
     }
     return render(request, "accounts/mypage.html", context)

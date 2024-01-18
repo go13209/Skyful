@@ -108,9 +108,9 @@
 
     <div class="mypage-box">
       <div class="mypage-box-header">
-        <button type="button" data-bs-toggle="collapse" data-bs-target="#shared_post"><div class="mypage-box-buttons">공유 일기</div></button>
-        <button><div class="mypage-box-buttons">댓글</div></button>
-        <button><div class="mypage-box-buttons">친구 찾기</div></button>
+        <button type="button"><div class="mypage-box-buttons" id="sharedPostButton">공유 일기</div></button>
+        <button><div class="mypage-box-buttons" id="commentButton">댓글</div></button>
+        <button><div class="mypage-box-buttons" id="findFriendButton">친구 찾기</div></button>
       </div>
 
       <div class="mypage-box-body">
@@ -159,12 +159,63 @@
                   </a>
                 {% endfor %}
               {% else %}
-                <p>나에게 공유된 일기가 없습니다.</p>
+                <p>내가 공유한 일기가 없습니다.</p>
               {% endif %}
             </div>
           </div>
         </div>
-        <div class="content-2"></div>
+
+        <div class="content-2">
+          <div class="box-1">
+            <h3>댓글이 달린 내 일기</h3>
+            <div class="shared-posts-box">
+              {% if posts_with_comments_by_others %}
+                {% for post in posts_with_comments_by_others %}
+                  <a href="{% url "posts:detail" post.user.pk post.date %}">
+                    <div class="card">
+                      {% if post.post_img %}
+                        <img src="{{ post.post_img.url }}" class="card-img-top" alt="일기 이미지">
+                      {% else %}
+                        <img src="{% static "img/cloud.png" %}" class="card-img-top" alt="일기 이미지">
+                      {% endif %}
+                      <div class="card-body">
+                        <h5 class="card-title text-truncate">{{ post.title }}</h5>
+                        <p class="card-text text-truncate">{{ post.content }}</p>
+                      </div>
+                    </div>
+                  </a>
+                {% endfor %}
+              {% else %}
+                <p>댓글이 달린 일기가 없습니다.</p>
+              {% endif %}
+            </div>
+          </div>
+          <div>
+            <h3>내가 댓글을 단 일기</h3>
+            <div class="shared-posts-box">
+              {% if posts_with_my_comments %}
+                {% for post in posts_with_my_comments %}
+                  <a href="{% url "posts:detail" post.user.pk post.date %}">
+                    <div class="card">
+                      {% if post.post_img %}
+                        <img src="{{ post.post_img.url }}" class="card-img-top" alt="일기 이미지">
+                      {% else %}
+                        <img src="{% static "img/cloud.png" %}" class="card-img-top" alt="일기 이미지">
+                      {% endif %}
+                      <div class="card-body">
+                        <h5 class="card-title text-truncate">{{ post.title }}</h5>
+                        <p class="card-text text-truncate">{{ post.content }}</p>
+                      </div>
+                    </div>
+                  </a>
+                {% endfor %}
+              {% else %}
+                <p>내가 댓글을 단 일기가 없습니다.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
         <div class="content-3"></div>
       </div>      
 

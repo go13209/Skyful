@@ -38,7 +38,7 @@ def create(request, post_date):
 
     followings = person.followings.all()
     followers = person.followers.all()
-    friends = followings | followers
+    friends = followings & followers
 
     context = {
         "form": form,
@@ -90,9 +90,9 @@ def update(request, post_pk):
     else:
         form = PostForm(instance=post)
 
-    following = person.followings.all()
+    followings = person.followings.all()
     followers = person.followers.all()
-    friends = following | followers
+    friends = followings & followers
 
     context = {
         "post": post,
@@ -124,7 +124,7 @@ def comment_create(request, post_pk):
             comment.post = post
             comment.user = request.user
             comment.save()
-            return redirect("posts:detail", request.user.pk, post.date)
+            return redirect("posts:detail", post.user.pk, post.date)
 
 
 @login_required

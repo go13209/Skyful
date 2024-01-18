@@ -50,7 +50,7 @@
       {% endif %}
 
       <div class="comment-writing-box">
-        <form method="post" action="{% url "posts:comment_create" post.pk %}">
+        <form method="POST" action="{% url "posts:comment_create" post.pk %}">
           {% csrf_token %}
           <div class="comment-content-box">
             {{ form.content }}

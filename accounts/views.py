@@ -11,6 +11,8 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.http import JsonResponse
+from django.db.models import Q
 
 
 def login(request):
@@ -122,3 +124,23 @@ def mypage(request):
         "posts_with_comments_by_others": posts_with_comments_by_others,
     }
     return render(request, "accounts/mypage.html", context)
+
+
+@login_required
+def search_friends(request, search_query):
+    User = get_user_model()
+    if request.method == 'GET':
+        results = User.objects.filter(
+            Q(username__icontains=search_query) | Q(nickname__icontains=search_query)
+        ).exclude(pk=request.user.pk)
+
+        results_list = [{
+            'pk': user.pk,
+            'username': user.username,
+            'nickname': user.nickname,
+            'profile_img': user.profile_img.url if user.profile_img else None,
+            'is_following': user.followers.filter(pk=request.user.pk).exists()
+        } for user in results]
+
+        return JsonResponse(results_list, safe=False)
+    return JsonResponse([], safe=False)

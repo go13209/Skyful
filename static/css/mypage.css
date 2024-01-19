@@ -44,7 +44,9 @@
 }
 
 .modal-body {
-  min-height: 200px;
+  min-height: 50px;
+  max-height: 300px;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -127,4 +129,23 @@
 
 .box-1 {
   margin-bottom: 15px;
+}
+
+.friend-search {
+  display: flex;
+}
+
+.friend-search button {
+  width: 100px;
+  color: white;
+  background-color: #abcded;
+  border: 3px solid #abcded;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.friend-search-results {
+  margin-top: 15px;
+  width: 100%;
 }

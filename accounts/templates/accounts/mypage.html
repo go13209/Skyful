@@ -45,13 +45,16 @@
                   </div>
                   <form action="{% url "accounts:follow" following.pk %}" method="POST">
                     {% csrf_token %}
-                    {% if following in followers %}
+                    {% if following in followings %}
                       <button>팔로우 취소</button>
                     {% else %}
                       <button>팔로우</button>
                     {% endif %}
                   </form>
                 </div>
+                {% if not forloop.last %}
+                  <br>
+                {% endif %}
                 {% endfor %}
               {% else %}
                 <div>팔로우 중인 친구가 없습니다. 친구 찾기 기능을 사용해보세요!</div>
@@ -91,6 +94,9 @@
                     {% endif %}
                   </form>
                 </div>
+                {% if not forloop.last %}
+                  <br>
+                {% endif %}
                 {% endfor %}
               {% else %}
                 <div>팔로워가 없습니다. 친구 찾기 기능을 사용해보세요!</div>
@@ -216,7 +222,13 @@
           </div>
         </div>
 
-        <div class="content-3"></div>
+        <div class="content-3">
+          <h3>친구 찾기</h3>
+          <div class="friend-search">
+            <input type="text" id="friendSearchInput" class="form-control" placeholder="🔍 친구의 아이디 또는 닉네임을 검색해보세요!">
+            <button onclick="searchFriends()">검색</button>
+          </div>
+          <div id="friendSearchResults" class="friend-search-results"></div>
       </div>      
 
     </div>

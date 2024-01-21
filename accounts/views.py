@@ -16,6 +16,9 @@ from django.db.models import Q
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect("posts:main")
+    
     if request.method == "POST":
         form = CustomAuthenticationForm(request, request.POST)
         if form.is_valid():
@@ -32,10 +35,13 @@ def login(request):
 @login_required
 def logout(request):
     auth_logout(request)
-    return redirect("index")
+    return redirect("posts:main")
 
 
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect("posts:main")
+    
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
@@ -69,7 +75,7 @@ def update(request):
 def delete(request):
     request.user.delete()
     auth_logout(request)
-    return redirect("index")
+    return redirect("posts:main")
 
 
 @login_required

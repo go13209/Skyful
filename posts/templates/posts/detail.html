@@ -22,11 +22,13 @@
       </div>
       <hr>
       <div class="post-buttons">
-        <a class="update-button" href="{% url "posts:update" post.pk %}"><i class="fa-solid fa-pen-to-square"></i> 수정</a>
-        <form class="delete-form" action="{% url "posts:delete" post.pk %}" method="POST">
-          {% csrf_token %}
-          <button type="submit"><i class="fa-solid fa-trash-can"></i> 삭제</button>
-        </form>
+        {% if request.user == post.user %}
+          <a class="update-button" href="{% url "posts:update" post.pk %}"><i class="fa-solid fa-pen-to-square"></i> 수정</a>
+          <form class="delete-form" action="{% url "posts:delete" post.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit"><i class="fa-solid fa-trash-can"></i> 삭제</button>
+          </form>
+        {% endif %}
       </div>
       <div class="post-content">
         {{ post.content }}
@@ -83,15 +85,17 @@
                       {% endif %}
                       <div>
                         <div>{{ comment.user.nickname }}</div>
-                        <div class="comment-date">{{ comment.created_at|date:"Y-m-d, f" }}</div>
+                        <div class="comment-date">{{ comment.created_at|date:"Y-m-d, H:i" }}</div>
                       </div>
                     </div>
                     <div class="comment-buttons">
-                      <a class="update-button" href=""><i class="fa-solid fa-pen-to-square"></i> 수정</a>
-                      <form class="delete-form" action="{% url "posts:comment_delete" post.pk comment.pk %}" method="POST">
-                        {% csrf_token %}
-                        <button><i class="fa-solid fa-trash-can"></i> 삭제</button>
-                      </form>
+                      {% if request.user == comment.user %}
+                        <a class="update-button" href=""><i class="fa-solid fa-pen-to-square"></i> 수정</a>
+                        <form class="delete-form" action="{% url "posts:comment_delete" post.pk comment.pk %}" method="POST">
+                          {% csrf_token %}
+                          <button><i class="fa-solid fa-trash-can"></i> 삭제</button>
+                        </form>
+                      {% endif %}
                     </div>
                   </div>
                   <div class="comment-content">

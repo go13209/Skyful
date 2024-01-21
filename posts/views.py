@@ -25,13 +25,12 @@ def create(request, post_date):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user
+            post.user = person
             post.public = request.POST.get("public") == "on"
             post.save()
 
             shared_users = request.POST.getlist("shared_with")
             post.shared_with.set(shared_users)
-
             return redirect("posts:main")
     else:
         form = PostForm(initial={"date": post_date})
@@ -75,6 +74,9 @@ def update(request, post_pk):
     User = get_user_model()
     person = User.objects.get(pk=request.user.pk)
 
+    if request.user != post.user:
+        return redirect("posts:main")
+
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
@@ -109,7 +111,6 @@ def delete(request, post_pk):
         if post.post_img:
             if os.path.isfile(post.post_img.path):
                 os.remove(post.post_img.path)
-
         post.delete()
     return redirect("posts:main")
 

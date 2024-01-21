@@ -6,7 +6,7 @@ from imagekit.processors import ResizeToFill
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    date = models.DateField(unique=True)
+    date = models.DateField()
     title = models.CharField(max_length=50)
     content = models.TextField()
     public = models.BooleanField(default=False)

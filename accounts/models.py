@@ -8,7 +8,7 @@ class User(AbstractUser):
     def image_path(instance, filename):
         return f"accounts/{instance.username}/{filename}"
 
-    nickname = models.CharField(max_length=20)
+    nickname = models.CharField(max_length=20, unique=True)
     profile_img = ProcessedImageField(
         upload_to=image_path,
         processors=[ResizeToFill(200, 200)],

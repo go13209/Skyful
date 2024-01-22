@@ -37,3 +37,40 @@ profileInput.addEventListener("change", function (event) {
     }
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const nicknameInput = document.getElementById("id_nickname");
+  const nicknameMessageElement = document.getElementById("nickname-message");
+
+  function checkDuplicate(input, type, messageElement) {
+    const value = input.value.trim();
+
+    if (value === "") {
+      messageElement.textContent = "";
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append(type, value);
+
+    fetch("/accounts/check_duplicate/", {
+      method: "POST",
+      body: formData,
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (messageElement) {
+          if (data[type].exists) {
+            messageElement.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> ${data[type].message}`;
+            messageElement.style.color = "red";
+          } else {
+            messageElement.textContent = "";
+          }
+        }
+      });
+  }
+
+  nicknameInput.addEventListener("blur", function () {
+    checkDuplicate(nicknameInput, "nickname", nicknameMessageElement);
+  });
+});

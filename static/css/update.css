@@ -14,6 +14,19 @@
   width: 450px;
 }
 
+.update-form label {
+  width: 100%;
+}
+
+.update-form label input {
+  width: 100%;
+}
+
+.duplicate-message {
+  display: inline-block;
+  margin-left: 5px;
+}
+
 .image-box {
   display: flex;
   justify-content: center;

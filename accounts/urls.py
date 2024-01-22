@@ -11,5 +11,6 @@ urlpatterns = [
     path("password_change/", views.password_change, name="password_change"),
     path("follow/<int:user_pk>/", views.follow, name="follow"),
     path("mypage/", views.mypage, name="mypage"),
-    path('search_friends/<str:search_query>/', views.search_friends, name='search_friends'),
+    path("search_friends/<str:search_query>/", views.search_friends, name="search_friends"),
+    path("check_duplicate/", views.check_duplicate, name="check_duplicate"),
 ]

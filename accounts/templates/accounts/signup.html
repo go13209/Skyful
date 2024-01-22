@@ -13,7 +13,17 @@
       <form action="{% url "accounts:signup" %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for inputs in form %}
-          {% if inputs.name == "profile_img" %}
+          {% if inputs.name == "username" %}
+            <label>{{inputs.label}}
+              <sapn id="username-message" class="duplicate-message"></sapn>
+              <p id="inputs">{{inputs}}</p>
+            </label>
+          {% elif inputs.name == "nickname" %}
+            <label>{{inputs.label}}
+              <sapn id="nickname-message" class="duplicate-message"></sapn>
+              <p id="inputs">{{inputs}}</p>
+            </label>
+          {% elif inputs.name == "profile_img" %}
             <label for="id_profile_img">{{inputs.label}}
               <input type="file" name="profile_img" id="id_profile_img" accept="image/*" onchange="previewImage(this)">
             </label>

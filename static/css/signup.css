@@ -22,6 +22,11 @@
   width: 100%;
 }
 
+.duplicate-message {
+  display: inline-block;
+  margin-left: 5px;
+}
+
 .image-box {
   display: flex;
   justify-content: center;

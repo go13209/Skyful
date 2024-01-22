@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from posts.models import Post, Comment
+from posts.models import Post
 from .forms import (
     CustomAuthenticationForm,
     CustomUserCreationForm,
@@ -10,9 +10,11 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from django.db.models import Q
+
 
 
 def login(request):
@@ -135,18 +137,36 @@ def mypage(request):
 @login_required
 def search_friends(request, search_query):
     User = get_user_model()
-    if request.method == 'GET':
+    if request.method == "GET":
         results = User.objects.filter(
             Q(username__icontains=search_query) | Q(nickname__icontains=search_query)
         ).exclude(pk=request.user.pk)
 
         results_list = [{
-            'pk': user.pk,
-            'username': user.username,
-            'nickname': user.nickname,
-            'profile_img': user.profile_img.url if user.profile_img else None,
-            'is_following': user.followers.filter(pk=request.user.pk).exists()
+            "pk": user.pk,
+            "username": user.username,
+            "nickname": user.nickname,
+            "profile_img": user.profile_img.url if user.profile_img else None,
+            "is_following": user.followers.filter(pk=request.user.pk).exists()
         } for user in results]
 
         return JsonResponse(results_list, safe=False)
     return JsonResponse([], safe=False)
+
+
+@csrf_exempt
+def check_duplicate(request):
+    User = get_user_model()
+    if request.method == "POST":
+        username = request.POST.get("username")
+        nickname = request.POST.get("nickname")
+
+        username_exists = User.objects.filter(username=username).exists()
+        nickname_exists = User.objects.filter(nickname=nickname).exists()
+
+        result_data = {
+            "username": {"exists": username_exists, "message": "사용 중인 아이디입니다."},
+            "nickname": {"exists": nickname_exists, "message": "사용 중인 닉네임입니다."},
+        }
+
+        return JsonResponse(result_data)

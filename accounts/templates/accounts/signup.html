@@ -15,12 +15,17 @@
         {% for inputs in form %}
           {% if inputs.name == "username" %}
             <label>{{inputs.label}}
-              <sapn id="username-message" class="duplicate-message"></sapn>
+              <span id="username-message" class="duplicate-message"></span>
               <p id="inputs">{{inputs}}</p>
             </label>
           {% elif inputs.name == "nickname" %}
             <label>{{inputs.label}}
-              <sapn id="nickname-message" class="duplicate-message"></sapn>
+              <span id="nickname-message" class="duplicate-message"></span>
+              <p id="inputs">{{inputs}}</p>
+            </label>
+          {% elif inputs.name == "password2" %}
+            <label>{{inputs.label}}
+              <span id="passwordMismatchMessage" class="mismatch-message"></span>
               <p id="inputs">{{inputs}}</p>
             </label>
           {% elif inputs.name == "profile_img" %}

@@ -22,7 +22,8 @@
   width: 100%;
 }
 
-.duplicate-message {
+.duplicate-message,
+.mismatch-message {
   display: inline-block;
   margin-left: 5px;
 }

@@ -16,7 +16,7 @@
           {% if inputs.label != "비밀번호" %}
             {% if inputs.name == "nickname" %}
               <label>{{inputs.label}}
-                <sapn id="nickname-message" class="duplicate-message"></sapn>
+                <span id="nickname-message" class="duplicate-message"></span>
                 <p id="inputs">{{inputs}}</p>
               </label>
             {% else %}
@@ -37,7 +37,7 @@
         <button type="submit">회원정보 수정</button>
       </form>
     </div>
-    <a href="{% url "posts:main" %}">⬅️ 돌아가기</a>
+    <a href="{% url "accounts:mypage" %}">⬅️ 돌아가기</a>
   </div>
 {% endblock content %}
 

@@ -16,6 +16,11 @@
             <label for="id_post_img">{{inputs.label}}
               <input type="file" name="post_img" id="id_post_img" accept="image/*" onchange="previewImage(this)">
             </label>
+          {% elif inputs.name == "title" %}
+            <label>{{inputs.label}}
+              <span id="length_count" class="length_count"></span>
+              <p id="inputs">{{inputs}}</p>
+            </label>
           {% else %}
             <label>{{inputs.label}}
               <p id="inputs">{{inputs}}</p>

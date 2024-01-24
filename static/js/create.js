@@ -29,3 +29,22 @@ publicCheckbox.addEventListener("change", function () {
     friendCheck.style.display = "none";
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const titleInput = document.getElementById("id_title");
+  const lengthCount = document.getElementById("length_count");
+
+  function checkLength() {
+    const titleLength = titleInput.value.length;
+
+    if (titleLength <= 50) {
+      lengthCount.textContent = `(${titleLength}/50)`;
+      lengthCount.style.color = "grey";
+    } else {
+      lengthCount.textContent = `(${titleLength}/50)`;
+      lengthCount.style.color = "red";
+    }
+  }
+
+  titleInput.addEventListener("input", checkLength);
+});

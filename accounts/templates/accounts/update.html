@@ -16,6 +16,7 @@
           {% if inputs.label != "비밀번호" %}
             {% if inputs.name == "nickname" %}
               <label>{{inputs.label}}
+                <span id="length_count" class="length_count"></span>
                 <span id="nickname-message" class="duplicate-message"></span>
                 <p id="inputs">{{inputs}}</p>
               </label>

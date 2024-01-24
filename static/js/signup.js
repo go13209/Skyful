@@ -80,3 +80,22 @@ document.addEventListener("DOMContentLoaded", function () {
   password1Input.addEventListener("input", checkPasswordMatch);
   password2Input.addEventListener("input", checkPasswordMatch);
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const nicknameInput = document.getElementById("id_nickname");
+  const lengthCount = document.getElementById("length_count");
+
+  function checkLength() {
+    const nicknameLength = nicknameInput.value.length;
+
+    if (nicknameLength <= 20) {
+      lengthCount.textContent = `(${nicknameLength}/20)`;
+      lengthCount.style.color = "grey";
+    } else {
+      lengthCount.textContent = `(${nicknameLength}/20)`;
+      lengthCount.style.color = "red";
+    }
+  }
+
+  nicknameInput.addEventListener("input", checkLength);
+});

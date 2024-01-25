@@ -135,3 +135,22 @@ def comment_delete(request, post_pk, comment_pk):
     if request.user == comment.user:
         comment.delete()
     return redirect("posts:detail", post.user.pk, post.date)
+
+
+@login_required
+def comment_update(request, post_pk, comment_pk):
+    post = Post.objects.get(pk=post_pk)
+    comment = Comment.objects.get(pk=comment_pk)
+
+    if request.user != comment.user:
+        return redirect("posts:detail", post.user.pk, post.date)
+    
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.user = request.user
+            comment.save()
+            return redirect("posts:detail", post.user.pk, post.date)
+    return redirect("posts:detail", post.user.pk, post.date)

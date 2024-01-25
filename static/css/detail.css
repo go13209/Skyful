@@ -150,6 +150,24 @@
   padding: 0 10px;
 }
 
+.update-comment-form-box {
+  display: none;
+}
+
+.update-comment-form {
+  display: flex;
+}
+
+.update-comment-form button {
+  width: 100px;
+  color: white;
+  background-color: #abcded;
+  border: 3px solid #abcded;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 5px;
+}
+
 .back-button {
   margin-top: 15px;
   text-decoration-line: none;

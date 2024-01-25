@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const updateButtons = document.querySelectorAll(".update-button");
+  const updateButtons = document.querySelectorAll(".comment-update-button");
 
   updateButtons.forEach(function (button) {
     button.addEventListener("click", function (event) {

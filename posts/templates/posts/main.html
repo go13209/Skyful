@@ -6,18 +6,17 @@
 {% endblock style%}
 
 {% block content %}
-  <header>
-    <h2>일기 달력</h2>
-    <label for="month">월</label>
-    <select id="month" onchange="updateCalendar()"></select>
-
-    <label for="year">년도</label>
-    <select id="year" onchange="updateCalendar()"></select>
-  </header>
-
-  <div class="calendar">
-    <div class="month" id="currentMonth"></div>
-    <div class="days" id="calendarDays"></div>
+  <div class="main-box">
+    <header>
+      <h1>일기 달력</h1>
+      <select id="year" onchange="updateCalendar()"></select>
+      <select id="month" onchange="updateCalendar()"></select>
+    </header>
+  
+    <div class="calendar">
+      <div class="month" id="currentMonth"></div>
+      <div class="days" id="calendarDays"></div>
+    </div>
   </div>
 {% endblock content %}
 

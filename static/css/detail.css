@@ -11,7 +11,8 @@
   border: 3px solid #abcded;
   border-radius: 10px;
   padding: 20px;
-  width: 600px;
+  width: 100%;
+  max-width: 700px;
 }
 
 .post-info-box {
@@ -58,7 +59,8 @@
   align-items: center;
 }
 
-.update-button {
+.update-button,
+.comment-update-button {
   color: #8e8e8e;
   text-decoration-line: none;
   margin-right: 5px;
@@ -101,7 +103,8 @@
   display: flex;
 }
 
-.comment-writing-box button {
+.comment-writing-box button,
+.update-comment-form button {
   width: 100px;
   color: white;
   background-color: #abcded;
@@ -156,16 +159,6 @@
 
 .update-comment-form {
   display: flex;
-}
-
-.update-comment-form button {
-  width: 100px;
-  color: white;
-  background-color: #abcded;
-  border: 3px solid #abcded;
-  border-radius: 5px;
-  padding: 5px;
-  margin-left: 5px;
 }
 
 .back-button {

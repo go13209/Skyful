@@ -1,9 +1,17 @@
+.main-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 header {
-  padding: 10px;
   text-align: center;
 }
 
 .calendar {
+  width: 100%;
   max-width: 500px;
   margin: 20px auto;
   background-color: #fff;
@@ -12,7 +20,7 @@ header {
 }
 
 #month, #year {
-  margin: 0 20px;
+  margin: 0;
 }
 .month {
   text-align: center;

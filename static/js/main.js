@@ -92,7 +92,7 @@ function populateDropdowns() {
   for (let i = -yearsRange; i <= yearsRange; i++) {
     const option = document.createElement("option");
     option.value = (currentYear + i).toString();
-    option.textContent = (currentYear + i).toString();
+    option.textContent = (currentYear + i).toString() + "년";
     yearDropdown.appendChild(option);
   }
 

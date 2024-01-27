@@ -22,7 +22,7 @@
           <img src="{% static "img/moon.jpg" %}" alt="달이 뜬 밤하늘 이미지" />
         </div>
       </div>
-      <div class="message">
+      <div class="phrases">
         <p>당신의 오늘 하늘은 어땠나요?</p>
         <p>흐리거나 비가 왔대도 괜찮아요.</p>
         <p>모든 하늘은 아름다움을 담고 있어요,</p>
@@ -45,3 +45,13 @@
     <a href="{% url "accounts:signup" %}">아직 회원이 아니신가요?</a>
   </div>
 {% endblock content %}
+
+{% block js %}
+<script>
+  {% if messages %}
+    {% for message in messages %}
+      alert("{{ message }}")
+    {% endfor %}
+  {% endif %}
+</script>
+{% endblock js %}

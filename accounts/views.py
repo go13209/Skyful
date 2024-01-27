@@ -11,21 +11,26 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from django.http import JsonResponse
+from django.contrib import messages
 from django.db.models import Q
-
 
 
 def login(request):
     if request.user.is_authenticated:
         return redirect("posts:main")
-    
+
     if request.method == "POST":
-        form = CustomAuthenticationForm(request, request.POST)
-        if form.is_valid():
-            auth_login(request, form.get_user())
+        form = CustomAuthenticationForm(request.POST)
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
             return redirect("posts:main")
+        else:
+            messages.error(request, "아이디 또는 비밀번호가 올바르지 않습니다.")
     else:
         form = CustomAuthenticationForm()
     context = {
@@ -43,7 +48,7 @@ def logout(request):
 def signup(request):
     if request.user.is_authenticated:
         return redirect("posts:main")
-    
+
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
@@ -116,11 +121,22 @@ def mypage(request):
     User = get_user_model()
     person = User.objects.get(pk=request.user.pk)
     followings = person.followings.all()
-    followers = person.followers.all()    
-    shared_posts_by_me = Post.objects.filter(user=person, shared_with__isnull=False).order_by("-date")
+    followers = person.followers.all()
+    shared_posts_by_me = Post.objects.filter(
+        user=person, shared_with__isnull=False
+    ).order_by("-date")
     shared_posts_to_me = person.shared_posts.all().order_by("-date")
-    posts_with_my_comments = Post.objects.filter(comment__user=person).exclude(user=person).distinct().order_by("-date")
-    posts_with_comments_by_others = Post.objects.filter(comment__user__in=followings, user=person).distinct().order_by("-date")
+    posts_with_my_comments = (
+        Post.objects.filter(comment__user=person)
+        .exclude(user=person)
+        .distinct()
+        .order_by("-date")
+    )
+    posts_with_comments_by_others = (
+        Post.objects.filter(comment__user__in=followings, user=person)
+        .distinct()
+        .order_by("-date")
+    )
 
     context = {
         "person": person,
@@ -142,13 +158,16 @@ def search_friends(request, search_query):
             Q(username__icontains=search_query) | Q(nickname__icontains=search_query)
         ).exclude(pk=request.user.pk)
 
-        results_list = [{
-            "pk": user.pk,
-            "username": user.username,
-            "nickname": user.nickname,
-            "profile_img": user.profile_img.url if user.profile_img else None,
-            "is_following": user.followers.filter(pk=request.user.pk).exists()
-        } for user in results]
+        results_list = [
+            {
+                "pk": user.pk,
+                "username": user.username,
+                "nickname": user.nickname,
+                "profile_img": user.profile_img.url if user.profile_img else None,
+                "is_following": user.followers.filter(pk=request.user.pk).exists(),
+            }
+            for user in results
+        ]
 
         return JsonResponse(results_list, safe=False)
     return JsonResponse([], safe=False)

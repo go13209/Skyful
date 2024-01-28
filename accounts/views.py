@@ -12,6 +12,8 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.contrib import messages
 from django.db.models import Q
@@ -51,6 +53,15 @@ def signup(request):
 
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST, request.FILES)
+        password = request.POST.get("password1")
+        try:
+            validate_password(password, user=form.instance)
+        except ValidationError:
+            messages.error(
+                request,
+                "비밀번호는 최소 8자 이상의 길이를 가져야 하며, 연속된 숫자나 문자를 사용할 수 없습니다. (예: 1234, abcd)",
+            )
+
         if form.is_valid():
             user = form.save()
             auth_login(request, user)

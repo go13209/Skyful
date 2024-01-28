@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
       method: "POST",
       body: formData,
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data[type].exists) {
           messageElement.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> ${data[type].message}`;
           messageElement.style.color = "red";
@@ -63,7 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const password1Input = document.getElementById("id_password1");
   const password2Input = document.getElementById("id_password2");
-  const mismatchMessageElement = document.getElementById("passwordMismatchMessage");
+  const mismatchMessageElement = document.getElementById(
+    "passwordMismatchMessage"
+  );
 
   function checkPasswordMatch() {
     const password1 = password1Input.value;
@@ -82,20 +84,34 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+  const usernameInput = document.getElementById("id_username");
+  const usernameLengthCount = document.getElementById("username-length-count");
   const nicknameInput = document.getElementById("id_nickname");
-  const lengthCount = document.getElementById("length_count");
+  const nicknameLengthCount = document.getElementById("nickname-length-count");
 
-  function checkLength() {
-    const nicknameLength = nicknameInput.value.length;
+  function usernameCheckLength() {
+    const usernameLength = usernameInput.value.length;
 
-    if (nicknameLength <= 20) {
-      lengthCount.textContent = `(${nicknameLength}/20)`;
-      lengthCount.style.color = "grey";
+    if (usernameLength <= 20) {
+      usernameLengthCount.textContent = `(${usernameLength}/20)`;
+      usernameLengthCount.style.color = "grey";
     } else {
-      lengthCount.textContent = `(${nicknameLength}/20)`;
-      lengthCount.style.color = "red";
+      usernameLengthCount.textContent = `(${usernameLength}/20)`;
+      usernameLengthCount.style.color = "red";
     }
   }
 
-  nicknameInput.addEventListener("input", checkLength);
+  function nicknameCheckLength() {
+    const nicknameLength = nicknameInput.value.length;
+
+    if (nicknameLength <= 20) {
+      nicknameLengthCount.textContent = `(${nicknameLength}/20)`;
+      nicknameLengthCount.style.color = "grey";
+    } else {
+      nicknameLengthCount.textContent = `(${nicknameLength}/20)`;
+      nicknameLengthCount.style.color = "red";
+    }
+  }
+  usernameInput.addEventListener("input", usernameCheckLength);
+  nicknameInput.addEventListener("input", nicknameCheckLength);
 });

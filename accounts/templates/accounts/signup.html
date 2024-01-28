@@ -15,12 +15,13 @@
         {% for inputs in form %}
           {% if inputs.name == "username" %}
             <label>{{inputs.label}}
+              <span id="username-length-count"></span>
               <span id="username-message" class="duplicate-message"></span>
               <p id="inputs">{{inputs}}</p>
             </label>
           {% elif inputs.name == "nickname" %}
             <label>{{inputs.label}}
-              <span id="length_count" class="length_count"></span>
+              <span id="nickname-length-count"></span>
               <span id="nickname-message" class="duplicate-message"></span>
               <p id="inputs">{{inputs}}</p>
             </label>
@@ -52,4 +53,11 @@
 
 {% block js %}
   <script src="{% static "js/signup.js" %}"></script>
+  <script>
+    {% if messages %}
+      {% for message in messages %}
+        alert("{{ message }}")
+      {% endfor %}
+    {% endif %}
+  </script>
 {% endblock js %}

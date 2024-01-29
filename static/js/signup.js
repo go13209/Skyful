@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const password2 = password2Input.value;
 
     if (password1 !== password2) {
-      mismatchMessageElement.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> 비밀번호가 일치하지 않습니다.`;
+      mismatchMessageElement.innerHTML = `<i class="fa-regular fa-circle-xmark"></i> 두 비밀번호가 일치하지 않습니다.`;
       mismatchMessageElement.style.color = "red";
     } else {
       mismatchMessageElement.textContent = "";

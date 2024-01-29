@@ -6,13 +6,17 @@ from .forms import (
     CustomUserChangeForm,
     CustomPasswordChangeForm,
 )
-from django.contrib.auth import login as auth_login
-from django.contrib.auth import logout as auth_logout
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import (
+    login as auth_login,
+    logout as auth_logout,
+    update_session_auth_hash,
+    get_user_model,
+    authenticate,
+)
+from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import get_user_model, authenticate
-from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.contrib import messages
@@ -100,6 +104,28 @@ def delete(request):
 def password_change(request):
     if request.method == "POST":
         form = CustomPasswordChangeForm(request.user, request.POST)
+        old_password = request.POST.get("old_password")
+        new_password = request.POST.get("new_password1")
+
+        if check_password(old_password, request.user.password):
+            if old_password == new_password:
+                messages.error(
+                    request,
+                    "현재 비밀번호와 변경 비밀번호가 동일합니다.",
+                )
+            else:
+                try:
+                    validate_password(new_password, user=request.user)
+                except ValidationError:
+                    messages.error(
+                        request,
+                        "비밀번호는 최소 8자 이상의 길이를 가져야 하며, 연속된 숫자나 문자를 사용할 수 없습니다. (예: 1234, abcd)",
+                    )
+        else:
+            messages.error(
+                request,
+                "현재 비밀번호가 일치하지 않습니다.",
+            )
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)

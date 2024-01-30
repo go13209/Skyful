@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from posts.models import Post
+from .models import Notification
 from .forms import (
     CustomAuthenticationForm,
     CustomUserCreationForm,
@@ -148,6 +149,10 @@ def follow(request, user_pk):
             person.followers.remove(request.user)
         else:
             person.followers.add(request.user)
+            Notification.objects.create(
+                user=person,
+                message=f"{request.user.nickname}님이 당신을 팔로우했습니다.",
+            )
         return redirect("accounts:mypage")
 
     return redirect("posts:main")
@@ -226,3 +231,12 @@ def check_duplicate(request):
         }
 
         return JsonResponse(result_data)
+
+
+@login_required
+def mark_as_read(request, notification_pk):
+    if request.method == "POST":
+        notification = Notification.objects.get(pk=notification_pk)
+        notification.is_read = True
+        notification.save()
+        return JsonResponse({"success": True})

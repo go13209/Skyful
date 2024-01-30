@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
+from accounts.models import Notification
 from datetime import datetime
 import os
 
@@ -125,6 +126,12 @@ def comment_create(request, post_pk):
             comment.post = post
             comment.user = request.user
             comment.save()
+
+            if comment.user != request.user:
+                Notification.objects.create(
+                    user=post.user,
+                    message=f"{request.user.nickname}님이 당신의 {post.date} 일기에 댓글을 달았습니다.",
+                )
             return redirect("posts:detail", post.user.pk, post.date)
 
 
@@ -144,7 +151,7 @@ def comment_update(request, post_pk, comment_pk):
 
     if request.user != comment.user:
         return redirect("posts:detail", post.user.pk, post.date)
-    
+
     if request.method == "POST":
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():

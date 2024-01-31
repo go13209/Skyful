@@ -1,4 +1,6 @@
 {% load static %}
+{% load custom_filters %}
+
 <head>
   <link rel="stylesheet" href="{% static "css/nav.css" %}">
 </head>
@@ -13,6 +15,35 @@
     </div>
     {% if user.is_authenticated %}
       <div class="navbar-right">
+        <div class="dropdown">
+          <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {% if request.user|unread_notifications %}
+              <i class="fa-solid fa-bell"></i>
+            {% else %}
+              <i class="fa-regular fa-bell"></i>
+            {% endif %}
+          </button>
+          <ul class="dropdown-menu">
+            {% if request.user|unread_notifications %}
+              {% for notification in request.user|unread_notifications %}
+                <li>
+                  <form action="{% url "accounts:mark_as_read" notification.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="mark-as-read-btn" data-notification-id="{{ notification.pk }}"><i class="fa-solid fa-xmark"></i></button>
+                    <div>{{ notification.message }}</div>
+                  </form>
+                </li>
+                {% if not forloop.last %}
+                  <li><hr class="dropdown-divider"></li>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <li>
+                <div>새로운 알림이 없습니다.</div>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
         <a class="buttons" href="{% url "accounts:mypage" %}">마이페이지</a>
         <form action="{% url "accounts:logout" %}" method="POST">
           {% csrf_token %}

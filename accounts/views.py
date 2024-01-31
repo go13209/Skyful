@@ -239,4 +239,8 @@ def mark_as_read(request, notification_pk):
         notification = Notification.objects.get(pk=notification_pk)
         notification.is_read = True
         notification.save()
-        return JsonResponse({"success": True})
+        context = {
+            "success": True,
+            "unread_count": request.user.notification_set.filter(is_read=False).count(),
+        }
+        return JsonResponse(context)

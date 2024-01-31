@@ -40,3 +40,33 @@ nav {
   border-radius: 5px;
   padding: 5px;
 }
+
+.dropdown-toggle {
+  background-color: transparent;
+  border: 0;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.dropdown-menu.show {
+  width: 200px;
+  margin-top: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-menu form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mark-as-read-btn {
+  background-color: transparent;
+  border: 0;
+  margin-left: auto;
+}

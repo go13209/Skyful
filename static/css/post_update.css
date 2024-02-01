@@ -15,9 +15,23 @@
   max-width: 500px;
 }
 
-.update-form label,
-input {
+.update-form label {
   width: 100%;
+}
+
+.weather-box {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.weather-radio {
+  display: flex;
+  align-items: center;
+}
+
+.weather-image {
+  width: 50px;
+  margin-left: 5px;
 }
 
 .image-box {

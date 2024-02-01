@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
   font-weight: bold;
 }
 
@@ -14,9 +15,23 @@
   max-width: 500px;
 }
 
-.create-form label,
-input {
+.create-form label {
   width: 100%;
+}
+
+.weather-box {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.weather-radio {
+  display: flex;
+  align-items: center;
+}
+
+.weather-image {
+  width: 50px;
+  margin-left: 5px;
 }
 
 .image-box {
@@ -40,6 +55,7 @@ input {
   max-height: 200px;
   overflow-y: auto;
   display: none;
+  padding: 5px;
 }
 
 .friend-check .form-check {

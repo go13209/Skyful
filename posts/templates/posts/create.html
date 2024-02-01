@@ -21,6 +21,16 @@
               <span id="length_count" class="length_count"></span>
               <p id="inputs">{{inputs}}</p>
             </label>
+          {% elif inputs.name == "weather" %}
+            <label class="weather">{{inputs.label}}</label>
+            <div class="weather-box">
+              {% for value, label in form.fields.weather.choices %}
+                <label class="weather-radio" for="weather_{{ value }}">
+                  <input class="form-check-input" type="radio" name="weather" value="{{ value }}" id="weather_{{ value }}">
+                  <img src="{% get_static_prefix %}img/weather_{{ value }}.png" alt="{{ label }}" class="weather-image">
+                </label>
+              {% endfor %}
+            </div>
           {% else %}
             <label>{{inputs.label}}
               <p id="inputs">{{inputs}}</p>

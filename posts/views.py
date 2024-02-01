@@ -93,6 +93,7 @@ def update(request, post_pk):
     else:
         form = PostForm(instance=post)
 
+    weather = post.weather
     followings = person.followings.all()
     followers = person.followers.all()
     friends = followings & followers
@@ -100,6 +101,7 @@ def update(request, post_pk):
     context = {
         "post": post,
         "form": form,
+        "weather": weather,
         "friends": friends,
     }
     return render(request, "posts/update.html", context)

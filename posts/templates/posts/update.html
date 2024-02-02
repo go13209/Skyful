@@ -28,6 +28,10 @@
                 </label>
               {% endfor %}
             </div>
+          {% elif inputs.name == "post_img" %}
+            <label for="id_post_img">{{inputs.label}}
+              <input type="file" name="post_img" id="id_post_img" accept="image/*">
+            </label>
           {% else %}
             <label>{{inputs.label}}
               <p id="inputs">{{inputs}}</p>
@@ -35,6 +39,7 @@
           {% endif %}
           <br>
         {% endfor %}
+        
         <div class="image-box">
           {% if post.post_img %}
             <img class="preview-1" src={{ post.post_img.url }} alt="프로필 이미지 미리보기">
@@ -74,7 +79,6 @@
             </div>
           {% endfor %}
         </div>
-
         <button type="submit">작성하기</button>
       </form>
     </div>

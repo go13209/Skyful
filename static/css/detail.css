@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
   font-weight: bold;
+  width: 100%;
 }
 
 .post-box {

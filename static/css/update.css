@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  height: 100%;
+  width: 100%;
 }
 
 .update-form {
@@ -15,7 +15,7 @@
   max-width: 500px;
 }
 
-.update-form label {
+.update-form form label {
   width: 100%;
 }
 
@@ -33,7 +33,7 @@
 
 .preview-1,
 .preview-2 {
-  height: 200px;
+  width: 200px;
 }
 
 .update-form button {

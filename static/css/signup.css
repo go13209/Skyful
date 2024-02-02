@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
   font-weight: bold;
+  width: 100%;
 }
 
 .signup-form {
@@ -15,11 +15,7 @@
   max-width: 500px;
 }
 
-.signup-form label {
-  width: 100%;
-}
-
-.signup-form label {
+.signup-form form label {
   width: 100%;
 }
 

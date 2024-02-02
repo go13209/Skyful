@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
   font-weight: bold;
+  width: 100%;
 }
 
 .create-form {
@@ -15,7 +15,7 @@
   max-width: 500px;
 }
 
-.create-form label {
+.create-form form label {
   width: 100%;
 }
 

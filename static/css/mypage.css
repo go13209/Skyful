@@ -2,8 +2,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   font-weight: bold;
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .main-box {
+    flex-direction: column;
+  }
+  .mypage-box {
+    margin-top: 10px;
+  }
 }
 
 .profile-box {
@@ -85,7 +94,8 @@
 }
 
 .mypage-box {
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
 }
 
 .mypage-box-header {

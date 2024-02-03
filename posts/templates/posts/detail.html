@@ -10,7 +10,19 @@
     <div class="post-box">
       <h2>{{ post.title }}</h2>
       <div class="post-info-box">
-        <div class="post-user-nickname">{{ post.user.nickname }}</div>
+        <div class="post-user-nickname">
+          {% if request.user == post.user %}
+            <div class="post-buttons">
+              <a class="update-button" href="{% url 'posts:update' post.pk %}"><i class="fa-solid fa-pen-to-square"></i> 수정</a>
+              <form class="delete-form" action="{% url "posts:delete" post.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit"><i class="fa-solid fa-trash-can"></i> 삭제</button>
+              </form>
+            </div>
+          {% else %}
+            {{ post.user.nickname }}
+          {% endif %}
+          </div>
         <div class="post-public-date">
           {% if post.shared_with.count > 0 %}
             <span class="public">공유중</span>
@@ -21,39 +33,23 @@
         </div>
       </div>
       <hr>
-      <div class="post-buttons">
-        {% if request.user == post.user %}
-          <a class="update-button" href="{% url 'posts:update' post.pk %}"><i class="fa-solid fa-pen-to-square"></i> 수정</a>
-          <form class="delete-form" action="{% url "posts:delete" post.pk %}" method="POST">
-            {% csrf_token %}
-            <button type="submit"><i class="fa-solid fa-trash-can"></i> 삭제</button>
-          </form>
-        {% endif %}
-      </div>
-      <div class="post-content">
-        {{ post.content }}
-      </div>
-      
+
       {% if post.post_img %}
         <div class="post-image">
-          <button type="button" data-bs-toggle="modal" data-bs-target="#imageModal">
-            <img class="preview" src="{{ post.post_img.url }}" alt="일기 사진">
-          </button>
-          <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <img class="modal-image" src="{{ post.post_img.url }}" alt="일기 사진">
-                </div>
-              </div>
-            </div>
-          </div>
+          <img src="{{ post.post_img.url }}" alt="일기 사진">
         </div>
       {% endif %}
 
+      <div class="post-content">
+        <div class="post-content-characters row g-0 row-cols-auto">
+          {% for char in post.content %}
+            <div class="character col">{{ char }}</div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="comment-box">
       <div class="comment-writing-box">
         <form method="POST" action="{% url "posts:comment_create" post.pk %}">
           {% csrf_token %}
@@ -65,7 +61,7 @@
       </div>
 
       {% if comments.count > 0 %}
-        <div class="accordion accordion-flush" id="accordionExample">
+        <div class="accordion accordion-flush">
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -76,7 +72,7 @@
             {% for comment in comments %}
               <div id="collapseOne" class="accordion-collapse collapse">
                 <div class="accordion-body">
-                  <div class="comment-box">
+                  <div class="comment-detail-box">
                     <div class="comment-writer-info">
                       {% if comment.user.profile_img %}
                         <img src="{{ comment.user.profile_img.url }}" alt="프로필 이미지">
@@ -116,7 +112,6 @@
           </div>
         </div>
       {% endif %}
-      
     </div>
     <a class="back-button" href="{% url "posts:main" %}">⬅️ 돌아가기</a>
   </div>

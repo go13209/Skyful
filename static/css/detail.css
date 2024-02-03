@@ -8,17 +8,19 @@
 }
 
 .post-box {
-  border: 3px solid #abcded;
-  border-radius: 10px;
-  padding: 20px;
   width: 100%;
   max-width: 700px;
+}
+
+.post-box h2 {
+  padding: 20px;
 }
 
 .post-info-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 20px;
 }
 
 .post-user-nickname {
@@ -74,25 +76,31 @@
 }
 
 .post-content {
-  min-height: 200px;
   max-height: 300px;
   overflow-y: auto;
-  margin: 15px 0;
 }
 
-.post-image button {
-  background-color: transparent;
-  border: none;
-  padding: 0;
+.character {
+  border: 1px solid #abcded;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.preview {
-  width: 100px;
-  height: 100px;
-}
-
-.modal-image {
+.post-image img {
   width: 100%;
+  max-height: 300px;
+}
+
+.comment-box {
+  border: 3px solid #abcded;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 15px;
+  width: 100%;
+  max-width: 700px;
 }
 
 .comment-writing-box form {
@@ -127,7 +135,7 @@
   border-color: #abcded;
 }
 
-.comment-box {
+.comment-detail-box {
   display: flex;
   justify-content: space-between;
 }

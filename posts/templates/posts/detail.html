@@ -8,31 +8,27 @@
 {% block content %}
   <div class="main-box">
     <div class="post-box">
-      <h2>{{ post.title }}</h2>
+      <h1>{{ post.title }}</h1>
       <div class="post-info-box">
-        <div class="post-user-nickname">
-          {% if request.user == post.user %}
-            <div class="post-buttons">
-              <a class="update-button" href="{% url 'posts:update' post.pk %}"><i class="fa-solid fa-pen-to-square"></i> 수정</a>
-              <form class="delete-form" action="{% url "posts:delete" post.pk %}" method="POST">
-                {% csrf_token %}
-                <button type="submit"><i class="fa-solid fa-trash-can"></i> 삭제</button>
-              </form>
-            </div>
-          {% else %}
-            {{ post.user.nickname }}
-          {% endif %}
-          </div>
-        <div class="post-public-date">
+        <div class="post-public-nickname">
           {% if post.shared_with.count > 0 %}
             <span class="public">공유중</span>
           {% else %}
             <span class="private">비공개</span>
           {% endif %}
-          <span class="post-date">{{ post.date|date:"Y-m-d" }}</span>
+          <span class="post-user-nickname">{{ post.user.nickname }}</span>
         </div>
       </div>
       <hr>
+      {% if request.user == post.user %}
+        <div class="post-buttons">
+          <a class="update-button" href="{% url 'posts:update' post.pk %}"><i class="fa-solid fa-pen-to-square"></i> 수정</a>
+          <form class="delete-form" action="{% url "posts:delete" post.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit"><i class="fa-solid fa-trash-can"></i> 삭제</button>
+          </form>
+        </div>            
+      {% endif %}
 
       {% if post.post_img %}
         <div class="post-image">
@@ -41,15 +37,9 @@
       {% endif %}
 
       <div class="post-content">
-        <div class="post-content-characters row g-0 row-cols-auto">
-          {% for char in post.content %}
-            <div class="character col">{{ char }}</div>
-          {% endfor %}
-        </div>
+        {{ post.content }}
       </div>
-    </div>
 
-    <div class="comment-box">
       <div class="comment-writing-box">
         <form method="POST" action="{% url "posts:comment_create" post.pk %}">
           {% csrf_token %}
@@ -63,11 +53,11 @@
       {% if comments.count > 0 %}
         <div class="accordion accordion-flush">
           <div class="accordion-item">
-            <h2 class="accordion-header">
+            <div class="accordion-header">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 댓글({{ comments.count }})
               </button>
-            </h2>
+            </div>
             
             {% for comment in comments %}
               <div id="collapseOne" class="accordion-collapse collapse">
@@ -79,7 +69,7 @@
                       {% else %}
                         <img src="{% static "img/user.png" %}" alt="기본 프로필 이미지">
                       {% endif %}
-                      <div>
+                      <div class="comment-nickname-date">
                         <div>{{ comment.user.nickname }}</div>
                         <div class="comment-date">{{ comment.created_at|date:"Y-m-d, H:i" }}</div>
                       </div>

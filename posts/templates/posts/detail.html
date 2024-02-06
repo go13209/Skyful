@@ -8,15 +8,19 @@
 {% block content %}
   <div class="main-box">
     <div class="post-box">
+      <div class="post-date-weather">
+        {{ post.date|date:"Y.m.d" }}
+        <img src="{% get_static_prefix %}img/weather_{{ post.weather }}.png" class="weather-image">
+      </div>
       <h1>{{ post.title }}</h1>
       <div class="post-info-box">
         <div class="post-public-nickname">
+          <span class="post-user-nickname">{{ post.user.nickname }}</span>
           {% if post.shared_with.count > 0 %}
             <span class="public">공유중</span>
           {% else %}
             <span class="private">비공개</span>
           {% endif %}
-          <span class="post-user-nickname">{{ post.user.nickname }}</span>
         </div>
       </div>
       <hr>
@@ -103,7 +107,9 @@
         </div>
       {% endif %}
     </div>
-    <a class="back-button" href="{% url "posts:main" %}">⬅️ 돌아가기</a>
+    <a class="back-button" href="{% url "posts:main" %}">
+      <i class="fa-solid fa-arrow-left"></i>돌아가기
+    </a>
   </div>
 {% endblock content %}
 

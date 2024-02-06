@@ -89,7 +89,7 @@ def update(request, post_pk):
             shared_users = request.POST.getlist("shared_with")
             post.shared_with.set(shared_users)
 
-            return redirect("posts:main")
+            return redirect("posts:detail", post.user.pk, post.date)
     else:
         form = PostForm(instance=post)
 
@@ -129,7 +129,7 @@ def comment_create(request, post_pk):
             comment.user = request.user
             comment.save()
 
-            if comment.user != request.user:
+            if post.user != request.user:
                 Notification.objects.create(
                     user=post.user,
                     message=f"{request.user.nickname}님이 당신의 {post.date} 일기에 댓글을 달았습니다.",

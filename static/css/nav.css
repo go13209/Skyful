@@ -7,6 +7,13 @@ nav {
   justify-content: space-between;
   padding: 10px;
 }
+
+.navbar-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .navbar-left a {
   display: flex;
   align-items: center;
@@ -14,13 +21,12 @@ nav {
   color: black;
 }
 
-.navbar-left img {
-  width: 50px;
+h1 {
+  margin: 0;
 }
 
-.navbar-left h3 {
-  margin-left: 10px;
-  margin-bottom: 0;
+.navbar-left img {
+  width: 60px;
 }
 
 .navbar-right {
@@ -46,10 +52,11 @@ nav {
   border: 0;
   padding: 5px;
   margin-right: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .dropdown-menu.show {
-  width: 200px;
   margin-top: 10px;
   padding: 10px;
   display: flex;
@@ -61,12 +68,14 @@ nav {
 .dropdown-menu form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
 }
 
 .mark-as-read-btn {
   background-color: transparent;
   border: 0;
+  padding: 0;
   margin-left: auto;
+  font-size: 0.8rem;
 }

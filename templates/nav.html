@@ -10,12 +10,12 @@
     <div class="navbar-left">
       <a href="{% url "posts:main" %}">
         <img src="{% static "img/cloud.png" %}" alt="구름 로고">
-        <h2>당신의 하늘</h2>
+        <h1>당신의 하늘</h1>
       </a>
     </div>
     {% if user.is_authenticated %}
       <div class="navbar-right">
-        <div class="dropdown">
+        <div class="dropstart">
           <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             {% if request.user|unread_notifications %}
               <i class="fa-solid fa-bell"></i>
@@ -33,9 +33,6 @@
                     <div>{{ notification.message }}</div>
                   </form>
                 </li>
-                {% if not forloop.last %}
-                  <li><hr class="dropdown-divider"></li>
-                {% endif %}
               {% endfor %}
             {% else %}
               <li>

@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
   width: 100%;
 }
 
@@ -46,7 +45,18 @@
 }
 
 .main-box a {
+  text-decoration-line: none;
+  color: black;
+}
+
+.back-button {
   margin-top: 15px;
   text-decoration-line: none;
   color: black;
+  display: flex;
+  align-items: center;
+}
+
+.back-button i {
+  margin-right: 5px;
 }

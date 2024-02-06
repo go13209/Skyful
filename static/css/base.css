@@ -1,10 +1,21 @@
+html {
+  font-size: 25px;
+}
+
 body {
-  font-family: "Hi Melody", "Poppins", sans-serif;
+  font-family: "Dongle", "Poppins", sans-serif;
   height: 100vh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  font-size: 20px;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
 }
 
 .container {

@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
   width: 100%;
 }
 
@@ -135,6 +134,10 @@
 .shared-posts-box .card {
   width: 150px;
   margin-right: 5px;
+}
+
+.shared-posts-box .card .card-body {
+  padding: 5px;
 }
 
 .box-1 {

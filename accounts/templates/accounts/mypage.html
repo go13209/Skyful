@@ -122,7 +122,7 @@
       <div class="mypage-box-body">
         <div class="content-1">
           <div class="box-1">
-            <h3>나에게 공유된 일기</h3>
+            <h1>나에게 공유된 일기</h1>
             <div class="shared-posts-box">
               {% if shared_posts_to_me %}
                 {% for post in shared_posts_to_me %}
@@ -134,7 +134,7 @@
                         <img src="{% static "img/cloud.png" %}" class="card-img-top" alt="일기 이미지">
                       {% endif %}
                       <div class="card-body">
-                        <h5 class="card-title text-truncate">{{ post.title }}</h5>
+                        <h2 class="card-title text-truncate">{{ post.title }}</h2>
                         <p class="card-text text-truncate">{{ post.content }}</p>
                       </div>
                     </div>
@@ -146,7 +146,7 @@
             </div>
           </div>
           <div>
-            <h3>내가 공유한 일기</h3>
+            <h1>내가 공유한 일기</h1>
             <div class="shared-posts-box">
               {% if shared_posts_by_me %}
                 {% for post in shared_posts_by_me %}
@@ -158,7 +158,7 @@
                         <img src="{% static "img/cloud.png" %}" class="card-img-top" alt="일기 이미지">
                       {% endif %}
                       <div class="card-body">
-                        <h5 class="card-title text-truncate">{{ post.title }}</h5>
+                        <h2 class="card-title text-truncate">{{ post.title }}</h2>
                         <p class="card-text text-truncate">{{ post.content }}</p>
                       </div>
                     </div>
@@ -173,7 +173,7 @@
 
         <div class="content-2">
           <div class="box-1">
-            <h3>댓글이 달린 내 일기</h3>
+            <h1>댓글이 달린 내 일기</h1>
             <div class="shared-posts-box">
               {% if posts_with_comments_by_others %}
                 {% for post in posts_with_comments_by_others %}
@@ -185,7 +185,7 @@
                         <img src="{% static "img/cloud.png" %}" class="card-img-top" alt="일기 이미지">
                       {% endif %}
                       <div class="card-body">
-                        <h5 class="card-title text-truncate">{{ post.title }}</h5>
+                        <h2 class="card-title text-truncate">{{ post.title }}</h2>
                         <p class="card-text text-truncate">{{ post.content }}</p>
                       </div>
                     </div>
@@ -197,7 +197,7 @@
             </div>
           </div>
           <div>
-            <h3>내가 댓글을 단 일기</h3>
+            <h1>내가 댓글을 단 일기</h1>
             <div class="shared-posts-box">
               {% if posts_with_my_comments %}
                 {% for post in posts_with_my_comments %}
@@ -209,7 +209,7 @@
                         <img src="{% static "img/cloud.png" %}" class="card-img-top" alt="일기 이미지">
                       {% endif %}
                       <div class="card-body">
-                        <h5 class="card-title text-truncate">{{ post.title }}</h5>
+                        <h2 class="card-title text-truncate">{{ post.title }}</h2>
                         <p class="card-text text-truncate">{{ post.content }}</p>
                       </div>
                     </div>
@@ -223,7 +223,7 @@
         </div>
 
         <div class="content-3">
-          <h3>친구 찾기</h3>
+          <h1>친구 찾기</h1>
           <div class="friend-search">
             <input type="text" id="friendSearchInput" class="form-control" placeholder="🔍 친구의 아이디 또는 닉네임을 검색해보세요!">
             <button onclick="searchFriends()">검색</button>

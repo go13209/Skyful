@@ -14,6 +14,11 @@
   max-width: 700px;
 }
 
+.post-date-weather img {
+  width: 50px;
+  height: 50px;
+}
+
 .post-info-box {
   display: flex;
   justify-content: right;
@@ -46,6 +51,10 @@
   padding: 1px 10px;
 }
 
+hr {
+  margin: 10px 0;
+}
+
 .post-buttons,
 .comment-buttons {
   text-align: right;
@@ -61,7 +70,7 @@
   margin-right: 10px;
   display: flex;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
 }
 
 .delete-form button {
@@ -71,7 +80,7 @@
   padding: 0;
   display: flex;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
 }
 
 .post-content {
@@ -109,10 +118,6 @@
   display: flex;
 }
 
-.comment-content-box input::placeholder {
-  font-size: 1.5rem;
-}
-
 .comment-writing-box button,
 .update-comment-form button {
   width: 100px;
@@ -130,7 +135,7 @@
 }
 
 .accordion-button {
-  font-size: 1.5rem;
+  padding: 10px;
 }
 
 .accordion-button:not(.collapsed) {
@@ -178,4 +183,10 @@
   margin-top: 15px;
   text-decoration-line: none;
   color: black;
+  display: flex;
+  align-items: center;
+}
+
+.back-button i {
+  margin-right: 5px;
 }

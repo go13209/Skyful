@@ -80,7 +80,7 @@
   background-color: #abcded;
   border: 3px solid #abcded;
   border-radius: 5px;
-  padding: 5px;
+  padding: 1px 10px;
 }
 
 .account-update-buttons button {
@@ -88,8 +88,8 @@
   background-color: #abcded;
   border: 3px solid #abcded;
   border-radius: 5px;
-  padding: 5px;
-  margin: 0 5px;
+  padding: 1px 10px;
+  margin: 5px;
 }
 
 .mypage-box {
@@ -111,7 +111,7 @@
   border: 3px solid #abcded;
   border-bottom: 0;
   border-radius: 10px 10px 0 0;
-  padding: 10px;
+  padding: 1px 10px;
   text-align: center;
   width: 100px;
 }
@@ -149,12 +149,12 @@
 }
 
 .friend-search button {
-  width: 100px;
+  width: 20%;
   color: white;
   background-color: #abcded;
   border: 3px solid #abcded;
   border-radius: 5px;
-  padding: 5px;
+  padding: 1px 10px;
   margin-left: 5px;
 }
 

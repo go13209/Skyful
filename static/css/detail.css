@@ -120,12 +120,12 @@ hr {
 
 .comment-writing-box button,
 .update-comment-form button {
-  width: 100px;
+  width: 20%;
   color: white;
   background-color: #abcded;
   border: 3px solid #abcded;
   border-radius: 5px;
-  padding: 5px;
+  padding: 1px 10px;
   margin-left: 5px;
 }
 

@@ -18,7 +18,10 @@
         <div class="dropstart">
           <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             {% if request.user|unread_notifications %}
-              <i class="fa-solid fa-bell"></i>
+              <i class="fa-solid fa-bell">
+                <span></span>
+              </i>
+                
             {% else %}
               <i class="fa-regular fa-bell"></i>
             {% endif %}

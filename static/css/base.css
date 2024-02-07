@@ -2,6 +2,12 @@ html {
   font-size: 25px;
 }
 
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 20px;
+  }
+}
+
 body {
   font-family: "Dongle", "Poppins", sans-serif;
   height: 100vh;

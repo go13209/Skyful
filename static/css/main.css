@@ -12,7 +12,7 @@ header {
 
 .calendar {
   width: 100%;
-  max-width: 500px;
+  max-width: 700px;
   margin: 20px auto;
   background-color: #fff;
   padding: 20px;
@@ -23,6 +23,7 @@ header {
 #year {
   margin: 0;
 }
+
 .month {
   text-align: center;
   margin-bottom: 20px;
@@ -36,7 +37,7 @@ header {
 
 .day {
   position: relative;
-  padding: 20px;
+  padding: 25px;
   text-align: center;
   cursor: pointer;
 }
@@ -45,19 +46,21 @@ header {
   background-color: #abcded;
 }
 
+.day-of-week:hover {
+  background-color: transparent;
+}
+
 .day span {
   display: block;
   margin-top: 5px;
 }
 
-.saturday {
-  color: blue;
-}
-
-.sunday {
-  color: red;
-}
-
 select {
   padding: 8px;
+}
+
+@media (max-width: 479px) {
+  .day {
+    padding: 16px;
+  }
 }

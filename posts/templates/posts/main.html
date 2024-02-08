@@ -9,13 +9,33 @@
   <div class="main-box">
     <header>
       <h1>일기 달력</h1>
-      <select id="year" onchange="updateCalendar()"></select>
-      <select id="month" onchange="updateCalendar()"></select>
+      <select id="year" onchange="updateCalendar()">
+        {% for year in future_years %}
+          <option {% if year == current_year %}selected{% endif %}>{{ year }}년</option>
+        {% endfor %}
+      </select>
+      <select id="month" onchange="updateCalendar()">
+        {% for month in months_range %}
+          <option {% if month == current_month %}selected{% endif %}>{{ month }}월</option>
+        {% endfor %}
+      </select>
     </header>
-  
+
     <div class="calendar">
       <div class="month" id="currentMonth"></div>
-      <div class="days" id="calendarDays"></div>
+      <div class="days" id="calendarDays">
+        {% for day in days_of_week %}
+          <div class="day day-of-week">{{ day }}</div>
+        {% endfor %}
+
+        {% for day in empty_days %}
+          <div class="day empty"></div>
+        {% endfor %}
+
+        {% for day in days_in_month %}
+          <div class="day">{{ day }}</div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 {% endblock content %}

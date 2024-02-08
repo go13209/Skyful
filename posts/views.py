@@ -6,12 +6,26 @@ from .forms import PostForm, CommentForm
 from .models import Post, Comment
 from accounts.models import Notification
 from datetime import datetime
+from calendar import monthrange
 import os
 
 
 def main(request):
     if request.user.is_authenticated:
-        return render(request, "posts/main.html")
+        current_year = datetime.now().year
+        current_month = datetime.now().month
+        future_years = range(current_year, current_year + 6)
+        months_range = range(1, 13)
+        days_of_week = ["일", "월", "화", "수", "목", "금", "토"]
+
+        context = {
+            "current_year": current_year,
+            "current_month": current_month,
+            "future_years": future_years,
+            "months_range": months_range,
+            "days_of_week": days_of_week,
+        }
+        return render(request, "posts/main.html", context)
     else:
         return redirect("accounts:login")
 

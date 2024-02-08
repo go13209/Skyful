@@ -92,3 +92,50 @@ h1 {
   margin-left: auto;
   font-size: 0.8rem;
 }
+
+.navbar-right-menu-1,
+.navbar-right-menu-2 a {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right-menu-2 {
+  position: relative;
+  display: none;
+}
+
+#menu {
+  position: absolute;
+  width: 100px;
+  right: 10px;
+  top: 65px;
+}
+
+#menu .card {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-right-menu-2 a i,
+#menu .card a {
+  text-decoration: none;
+  color: #000000;
+}
+
+#menu .card form button {
+  border: 0;
+  background-color: transparent;
+}
+
+@media (max-width: 575px) {
+  .navbar-right-menu-2 {
+    display: block;
+  }
+
+  .navbar-right-menu-1 {
+    display: none;
+  }
+}

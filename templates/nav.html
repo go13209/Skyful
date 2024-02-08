@@ -44,12 +44,28 @@
             {% endif %}
           </ul>
         </div>
-        <a class="buttons" href="{% url "accounts:mypage" %}">마이페이지</a>
-        <form action="{% url "accounts:logout" %}" method="POST">
-          {% csrf_token %}
-          <button class="buttons" type-="submit">로그아웃</button>
-        </form>
+        <div class="navbar-right-menu-1">
+          <a class="buttons" href="{% url "accounts:mypage" %}">마이페이지</a>
+          <form action="{% url "accounts:logout" %}" method="POST">
+            {% csrf_token %}
+            <button class="buttons" type="submit">로그아웃</button>
+          </form>
+        </div>
+        <div class="navbar-right-menu-2">
+          <a data-bs-toggle="collapse" href="#menu" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <i class="fa-solid fa-bars"></i>
+          </a>
+        </div>
       </div>
     {% endif %}
+  </div>
+  <div class="collapse" id="menu">
+    <div class="card card-body">
+      <a href="{% url "accounts:mypage" %}">마이페이지</a>
+      <form action="{% url "accounts:logout" %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">로그아웃</button>
+      </form>
+    </div>
   </div>
 </nav>

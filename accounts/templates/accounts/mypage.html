@@ -138,6 +138,13 @@
                         <p class="card-text text-truncate">{{ post.content }}</p>
                       </div>
                     </div>
+                    <div class="post-list">
+                      <ul class="list-group">
+                        <li class="list-group-item text-truncate">
+                          {{ post.date}} | {{ post.title }}
+                        </li>
+                      </ul>
+                    </div>
                   </a>
                 {% endfor %}
               {% else %}
@@ -145,7 +152,7 @@
               {% endif %}
             </div>
           </div>
-          <div>
+          <div class="box-2">
             <h1>내가 공유한 일기</h1>
             <div class="shared-posts-box">
               {% if shared_posts_by_me %}
@@ -161,6 +168,13 @@
                         <h2 class="card-title text-truncate">{{ post.title }}</h2>
                         <p class="card-text text-truncate">{{ post.content }}</p>
                       </div>
+                    </div>
+                    <div class="post-list">
+                      <ul class="list-group">
+                        <li class="list-group-item text-truncate">
+                          {{ post.date}} | {{ post.title }}
+                        </li>
+                      </ul>
                     </div>
                   </a>
                 {% endfor %}
@@ -189,6 +203,13 @@
                         <p class="card-text text-truncate">{{ post.content }}</p>
                       </div>
                     </div>
+                    <div class="post-list">
+                      <ul class="list-group">
+                        <li class="list-group-item text-truncate">
+                          {{ post.date}} | {{ post.title }}
+                        </li>
+                      </ul>
+                    </div>
                   </a>
                 {% endfor %}
               {% else %}
@@ -196,7 +217,7 @@
               {% endif %}
             </div>
           </div>
-          <div>
+          <div class="box-2">
             <h1>내가 댓글을 단 일기</h1>
             <div class="shared-posts-box">
               {% if posts_with_my_comments %}
@@ -212,6 +233,13 @@
                         <h2 class="card-title text-truncate">{{ post.title }}</h2>
                         <p class="card-text text-truncate">{{ post.content }}</p>
                       </div>
+                    </div>
+                    <div class="post-list">
+                      <ul class="list-group">
+                        <li class="list-group-item text-truncate">
+                          {{ post.date}} | {{ post.title }}
+                        </li>
+                      </ul>
                     </div>
                   </a>
                 {% endfor %}

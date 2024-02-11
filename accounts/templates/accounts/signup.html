@@ -25,6 +25,11 @@
               <span id="nickname-message" class="duplicate-message"></span>
               <p id="inputs">{{inputs}}</p>
             </label>
+          {% elif inputs.name == "password1" %}
+            <label>{{inputs.label}}
+              <div id="passwordValidationMessage" class="validation-message"></div>
+              <p id="inputs">{{inputs}}</p>
+            </label>
           {% elif inputs.name == "password2" %}
             <label>{{inputs.label}}
               <span id="passwordMismatchMessage" class="mismatch-message"></span>
@@ -34,17 +39,13 @@
             <label for="id_profile_img">{{inputs.label}}
               <input type="file" name="profile_img" id="id_profile_img" accept="image/*" onchange="previewImage(this)">
             </label>
-          {% else %}
-            <label>{{inputs.label}}
-              <p id="inputs">{{inputs}}</p>
-            </label>
           {% endif %}
           <br>
         {% endfor %}
         <div class="image-box">
           <img class="preview" src="#" alt="프로필 이미지 미리보기">
         </div>
-        <button type="submit">회원가입</button>
+        <button id="signup-button" type="submit" disabled>회원가입</button>
       </form>
     </div>
     <a class="back-button" href="{% url "accounts:login" %}">
@@ -55,11 +56,4 @@
 
 {% block js %}
   <script src="{% static "js/signup.js" %}"></script>
-  <script>
-    {% if messages %}
-      {% for message in messages %}
-        alert("{{ message }}")
-      {% endfor %}
-    {% endif %}
-  </script>
 {% endblock js %}

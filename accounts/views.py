@@ -58,15 +58,6 @@ def signup(request):
 
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST, request.FILES)
-        password = request.POST.get("password1")
-        try:
-            validate_password(password, user=form.instance)
-        except ValidationError:
-            messages.error(
-                request,
-                "비밀번호는 최소 8자 이상의 길이를 가져야 하며, 연속된 숫자나 문자를 사용할 수 없습니다. (예: 1234, abcd)",
-            )
-
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
@@ -226,8 +217,14 @@ def check_duplicate(request):
         nickname_exists = User.objects.filter(nickname=nickname).exists()
 
         result_data = {
-            "username": {"exists": username_exists, "message": "사용 중인 아이디입니다."},
-            "nickname": {"exists": nickname_exists, "message": "사용 중인 닉네임입니다."},
+            "username": {
+                "exists": username_exists,
+                "message": "사용 중인 아이디입니다.",
+            },
+            "nickname": {
+                "exists": nickname_exists,
+                "message": "사용 중인 닉네임입니다.",
+            },
         }
 
         return JsonResponse(result_data)

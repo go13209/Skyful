@@ -18,7 +18,6 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.contrib import messages
 from django.db.models import Q
@@ -103,16 +102,8 @@ def password_change(request):
             if old_password == new_password:
                 messages.error(
                     request,
-                    "현재 비밀번호와 변경 비밀번호가 동일합니다.",
+                    "현재 비밀번호와 변경하려는 비밀번호가 동일합니다.",
                 )
-            else:
-                try:
-                    validate_password(new_password, user=request.user)
-                except ValidationError:
-                    messages.error(
-                        request,
-                        "비밀번호는 최소 8자 이상의 길이를 가져야 하며, 연속된 숫자나 문자를 사용할 수 없습니다. (예: 1234, abcd)",
-                    )
         else:
             messages.error(
                 request,

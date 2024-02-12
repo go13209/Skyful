@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // 비밀번호, 비밀번호 입력 일치 검사
+  // 비밀번호, 비밀번호 확인 일치 검사
   function checkPasswordMatch() {
     const password1 = password1Input.value;
     const password2 = password2Input.value;

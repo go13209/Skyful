@@ -35,7 +35,7 @@
             <img class="preview-2" src="#" alt="프로필 이미지 미리보기">
           {% endif %}
         </div>
-        <button type="submit">회원정보 수정</button>
+        <button id="update-button" type="submit">회원정보 수정</button>
       </form>
     </div>
     <a class="back-button" href="{% url "accounts:mypage" %}">
@@ -46,5 +46,6 @@
 
 
 {% block js %}
+  <script>const currentUserNickname = "{{ request.user.nickname }}";</script>
   <script src="{% static "js/update.js" %}"></script>
 {% endblock js %}

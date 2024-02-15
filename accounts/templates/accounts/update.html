@@ -38,6 +38,10 @@
         <button id="update-button" type="submit">회원정보 수정</button>
       </form>
     </div>
+    <form class="delete-form" action="{% url "accounts:delete" %}" method="POST">
+      {% csrf_token %}
+      <button class="delete-button" type="submit">회원탈퇴</button>
+    </form>
     <a class="back-button" href="{% url "accounts:mypage" %}">
       <i class="fa-solid fa-arrow-left"></i>돌아가기
     </a>

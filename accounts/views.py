@@ -14,13 +14,13 @@ from django.contrib.auth import (
     get_user_model,
     authenticate,
 )
-from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.contrib import messages
 from django.db.models import Q
+import os
 
 
 def login(request):
@@ -86,6 +86,9 @@ def update(request):
 
 @login_required
 def delete(request):
+    if request.user.profile_img:
+        if os.path.isfile(request.user.profile_img.path):
+            os.remove(request.user.profile_img.path)
     request.user.delete()
     auth_logout(request)
     return redirect("posts:main")

@@ -65,3 +65,19 @@
   background-color: #efefef;
   border: 3px solid #efefef;
 }
+
+.delete-form {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: right;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: 0;
+  color: red;
+  text-align: right;
+  text-decoration: underline;
+  text-underline-offset: 7px;
+}

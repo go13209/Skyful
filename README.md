@@ -62,13 +62,18 @@
   - 년도별, 월별 달력 표시
   - 일기 작성 여부에 따른 아이콘 별도 표시
   - 일기를 작성한 날의 경우 일기 세부 페이지로 이동
-  - 일기를 작성하지 않은 날의 경우 일기 작성 페이지로 이동
+  - 일기를 작성하지 않은 날의 경우 일기 작성 페이지로 이동  
+    <img src=".\skyful_readme_img\main.png">
 
 - 회원가입 / 회원정보 수정 / 비밀번호 변경
 
   - 아이디 및 닉네임 중복 확인
   - 아이디 및 닉네임 글자 수 자동 체크
   - 필수 입력칸이 채워질 경우 자동 버튼 활성화
+    <img src=".\skyful_readme_img\accounts_signup_(1).png">
+    <img src=".\skyful_readme_img\accounts_signup_(2).png">
+    <img src=".\skyful_readme_img\accounts_update.png">
+    <img src=".\skyful_readme_img\accounts_password_change.png">
 
 - 마이페이지
 
@@ -78,18 +83,25 @@
   - 공유하거나 공유받은 일기 표시
   - 내가 댓글을 쓴 일기와 댓글이 달린 나의 일기 표시
   - 아이디 및 닉네임을 통한 유저 찾기
+    <img src=".\skyful_readme_img\accounts_mypage_(1).png">
+    <img src=".\skyful_readme_img\accounts_mypage_(2).png">
+    <img src=".\skyful_readme_img\accounts_mypage_(3).png">
 
 - 일기 작성 / 수정 페이지
 
   - 메인 페이지에서 일기 작성 페이지로 이동시 클릭한 날짜 자동 입력
   - 날짜, 일기 제목, 내용, 사진 작성
   - 서로 팔로우 중인 유저에 한해 일기 공유 가능
+    <img src=".\skyful_readme_img\post_create.png">
 
 - 일기 세부 페이지
 
   - 일기 수정 / 삭제
   - 댓글 작성 / 수정 / 삭제
+    <img src=".\skyful_readme_img\posts_detail.png">
 
 - 알림
   - 내가 쓴 일기에 댓글이 달린 경우 알림
   - 다른 유저가 나를 팔로우할 시 알림
+    <img src=".\skyful_readme_img\alarm_(1).png">
+    <img src=".\skyful_readme_img\alarm_(2).png">
